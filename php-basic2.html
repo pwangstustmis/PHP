@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PHP</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+
+    <!-- Side-Nav -->
+    <div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+      <ul class="nav flex-column text-white w-100">
+        <li class="nav-item" style="background-color: #fff;padding-left:10px;padding-top:10px;border-bottom: rgb(255, 115, 0) 2px solid;font-size: 16pt;">
+          <p style="color:rgb(248, 138, 11);font-weight: 700;">PHP<br/>進階網頁程式設計</p>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a href="index.html" class="nav-link">簡介與軟體安裝</a></span>
+        </li>
+        <li class="nav-item">
+          <div class="nav-link" href="#topic1" class="nav-item" data-bs-toggle="collapse" aria-expanded="false" aria-controls="topic1">
+            <span class="mx-2">PHP-Basics</span>
+            <i class="fas fa-angle-right"></i>
+          </div>
+          <div class="collapse" id="topic1">
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic1.html">PHP基本語法</a></li>
+            </ul>
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic2.html">前端表單</a></li>
+            </ul>
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic3.html">PHP表單處理-1</a></li>
+            </ul>
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic4.html">PHP表單處理-2</a></li>
+            </ul>
+          </div>
+        </li>     
+      </ul>
+    </div>
+
+
+    <!-- Main Wrapper -->
+    <div class="p-2 my-container active-cont">
+      <!-- Breadcrumb -->
+      <div class="bg-light px-5" aria-label="breadcrumb" style="height:40px;position:fixed;width:100%;top:0;">
+        <a class="btn border-0" id="menu-btn" style="position:fixed"><i class="fas fa-bars"></i></a>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">前端表單</li>
+        </ol>
+      </div>
+      <!--End Top Nav -->
+
+      <!-- main page -->
+      <div style="margin-top:50px;" id="pagetop">
+        <h3 class="text-danger p-3">內容涵蓋</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          <ul>
+            <li><a href="#pagetopic1">表單標籤-input</a></li>
+            <li><a href="#pagetopic2">表單標籤-文字區域與下拉式方塊</a></li>
+          </ul>
+        </p>
+        
+        <h3 class="text-danger p-3" >表單標籤-form</h3>
+        <p>表單最常為商業網頁使用，表單內容標籤需包含於form標籤內，form標籤常用屬性包含action、method與enctype，action屬性用於指定表單資料處理檔案，如未指定action則表單將傳送給自己，method屬性包含get與post值，當method屬性為get時，表單資料會透過網址列變數名稱與值的方式進行傳送，傳送長度約3000字大小，當method屬性為post時，表單資料會儲存於HTTP request內容中進行傳送，沒有長度限制。enctype屬性限用於method屬性值為post，用於設定表單資料編碼方式，一般為 application/x-www-form-urlencoded 或 multipart/form-data，前者為預設編碼方式，而後者用於上載檔案。</p>
+        <p class="text-danger">HTML原始碼：</p>
+            <pre><code>
+&lt;form method="get" action="負責處理表單php檔"&gt;
+
+&lt;/form&gt;
+&lt;form method="post" action="負責處理表單php檔"&gt;
+
+&lt;/form&gt;
+            </code></pre>
+        </div>
+
+        <div class="px-3" id="pagetopic1">
+            <h5 style="color:rgb(96, 54, 192)">表單輸入標籤-input</h5>
+            <p>表單輸入標籤input是表單中使用最為頻繁的標籤，用於資料輸入，藉由type屬性設定text(文字)、button(按鈕)、color(顏色選取)、date(日期選取)、datetime-local(日期及時間選擇)、email(電子郵件輸入)、file(檔案選擇)、hidden(隱藏表單欄位)、image(圖片按鈕)、month(月份選擇)、number(數字選擇器)、password(密碼輸入)、range(範圍選擇器)、submit(送出按鈕)、tel(電話號碼)、time(時間選擇器)、week(月份選擇器)。屬性依據不同類型而有所不同，請參考<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input" target="_blank">MDN Wen DOcs Input element</a>，如果input標籤一定要輸入則含屬性required ，要傳送給後端程式表單欄位請設定name屬性用於後端程式對應個別欄位，input標籤一般會搭配label標籤用於設定欄位標籤文字。</p>
+            <div>
+              <form>
+                <label for="f1">text類型</label>
+                <input type="text" id="f1"><p></p>            
+              </form>
+            </div>
+            <p class="text-danger">HTML原始碼：</p>
+              <pre><code>
+  &lt;form&gt;
+    &lt;label for="f1"&gt;text類型&lt;/label&gt;
+    &lt;input type="text" id="f1"&gt;&lt;p&gt;&lt;/p&gt;
+  &lt;/form&gt;
+              </code></pre>
+            <div>
+              <form>
+                <label for="f2">button類型</label>
+                <input type="button" value="button類型" id="f2"><p></p>      
+              </form>
+            </div>
+            <p class="text-danger">HTML原始碼：</p>
+              <pre><code>
+  &lt;form&gt;
+    &lt;label for="f2"&gt;button類型&lt;/label&gt;
+    &lt;input type="button" id="f2"&gt;&lt;p&gt;&lt;/p&gt;
+  &lt;/form&gt;
+              </code></pre>
+              <div>
+                <form>
+                  <label for="f3">color類型</label>
+                  <input type="color" id="f3"><p></p>      
+                </form>
+              </div>
+              <p class="text-danger">HTML原始碼：</p>
+              <pre><code>
+  &lt;form&gt;
+    &lt;label for="f3"&gt;color類型&lt;/label&gt;
+    &lt;input type="color" id="f3"&gt;&lt;p&gt;&lt;/p&gt;
+  &lt;/form&gt;
+              </code></pre>
+              <div>
+                <form>
+                  <label for="f4">date類型</label>
+                  <input type="date" id="f4"><p></p>      
+                </form>
+              </div>
+              <p class="text-danger">HTML原始碼：</p>
+              <pre><code>
+  &lt;form&gt;
+    &lt;label for="f4"&gt;date類型&lt;/label&gt;
+    &lt;input type="date" id="f4"&gt;&lt;p&gt;&lt;/p&gt;
+  &lt;/form&gt;
+              </code></pre>
+              <div>
+                <form>
+                  <label for="f5">datetime-local類型</label>
+                  <input type="datetime-local" id="f5"><p></p>      
+                </form>
+              </div>
+              <p class="text-danger">HTML原始碼：</p>
+              <pre><code>
+  &lt;form&gt;
+    &lt;label for="f5"&gt;datetime-local類型&lt;/label&gt;
+    &lt;input type="datetime-local" id="f5"&gt;&lt;p&gt;&lt;/p&gt;
+  &lt;/form&gt;
+              </code></pre>
+              <div>
+                <form>
+                  <label for="f6">email類型</label>
+                  <input type="email" id="f6"><p></p>      
+                </form>
+              </div>
+              <p class="text-danger">HTML原始碼：</p>
+              <pre><code>
+  &lt;form&gt;
+    &lt;label for="f6"&gt;email類型&lt;/label&gt;
+    &lt;input type="email" id="f6"&gt;&lt;p&gt;&lt;/p&gt;
+  &lt;/form&gt;
+              </code></pre>
+              <div>
+                <form>
+                  <label for="f7">file類型</label>
+                  <input type="file" id="f7"><p></p>      
+                </form>
+              </div>
+              <p class="text-danger">HTML原始碼：</p>
+              <pre><code>
+  &lt;form&gt;
+    &lt;label for="f7"&gt;file類型&lt;/label&gt;
+    &lt;input type="file" id="f7"&gt;&lt;p&gt;&lt;/p&gt;
+  &lt;/form&gt;
+              </code></pre>
+              <div>
+                <form>
+                  <label for="f8">hidden類型</label>
+                  <input type="hidden" id="f8"><p></p>      
+                </form>
+              </div>
+              <p class="text-danger">HTML原始碼：</p>
+              <pre><code>
+  &lt;form&gt;
+    &lt;label for="f8"&gt;hidden類型&lt;/label&gt;
+    &lt;input type="hidden" id="f8"&gt;&lt;p&gt;&lt;/p&gt;
+  &lt;/form&gt;
+              </code></pre>
+              <div>
+                <form>
+                  <label for="f9">image類型</label>
+                  <input type="image" id="f9" src="imgs/introhtml/imgbutton.png"><p></p>     
+                </form>
+              </div>
+              <p class="text-danger">HTML原始碼：</p>
+              <pre><code>
+  &lt;form&gt;
+    &lt;label for="f9"&gt;image類型&lt;/label&gt;
+    &lt;input type="image" id="f9" src="imgs/introhtml/imgbutton.png"&gt;&lt;p&gt;&lt;/p&gt;
+  &lt;/form&gt;
+              </code></pre>
+              <div>
+                <form>
+                  <label for="f10">month類型</label>
+                  <input type="month" id="f10"><p></p>     
+                </form>
+              </div>
+              <p class="text-danger">HTML原始碼：</p>
+              <pre><code>
+  &lt;form&gt;
+    &lt;label for="f10"&gt;month類型&lt;/label&gt;
+    &lt;input type="month" id="f10"&gt;&lt;p&gt;&lt;/p&gt;
+  &lt;/form&gt;
+              </code></pre>
+              <div>
+                <form>
+                  <label for="f11">number類型</label>
+                  <input type="number" id="f11" value="10" min="10" max="20"><p></p>     
+                </form>
+              </div>
+              <p class="text-danger">HTML原始碼：</p>
+              <pre><code>
+  &lt;form&gt;
+    &lt;label for="f11"&gt;number類型&lt;/label&gt;
+    &lt;input type="number" id="f11" value="10" min="10" max="20"&gt;&lt;p&gt;&lt;/p&gt;
+  &lt;/form&gt;
+              </code></pre>
+              <div>
+                <form>
+                  <label for="f12">password類型</label>
+                  <input type="password" id="f12"><p></p>     
+                </form>
+              </div>
+              <p class="text-danger">HTML原始碼：</p>
+              <pre><code>
+  &lt;form&gt;
+    &lt;label for="f12"&gt;password類型&lt;/label&gt;
+    &lt;input type="password" id="f12"&gt;&lt;p&gt;&lt;/p&gt;
+  &lt;/form&gt;
+              </code></pre>
+              <div>
+                <form>
+                  <label for="f13">range類型</label>
+                  <input type="range" id="f13" min="10" max="20"><p></p>     
+                </form>
+              </div>
+              <p class="text-danger">HTML原始碼：</p>
+              <pre><code>
+  &lt;form&gt;
+    &lt;label for="f13"&gt;range類型&lt;/label&gt;
+    &lt;input type="range" id="f13" min="10" max="20"&gt;&lt;p&gt;&lt;/p&gt;
+  &lt;/form&gt;
+              </code></pre>
+              <div>
+                <form>
+                  <label for="f14">submit類型</label>
+                  <input type="submit" id="f14" value="送出"><p></p>    
+                </form>
+              </div>
+              <p class="text-danger">HTML原始碼：</p>
+              <pre><code>
+  &lt;form&gt;
+    &lt;label for="f14"&gt;submit類型&lt;/label&gt;
+    &lt;input type="submit" id="f14" value="送出"&gt;&lt;p&gt;&lt;/p&gt;
+  &lt;/form&gt;
+              </code></pre>
+              <div>
+                <form>
+                  <label for="f15">tel類型</label>
+                  <input type="tel" id="f15"><p></p>    
+                </form>
+              </div>
+              <p class="text-danger">HTML原始碼：</p>
+              <pre><code>
+  &lt;form&gt;
+    &lt;label for="f15"&gt;tel類型&lt;/label&gt;
+    &lt;input type="tel" id="f15"&gt;&lt;p&gt;&lt;/p&gt;
+  &lt;/form&gt;
+              </code></pre>
+              <div>
+                <form>
+                  <label for="f16">time類型</label>
+                  <input type="time" id="f16"><p></p>    
+                </form>
+              </div>
+              <p class="text-danger">HTML原始碼：</p>
+              <pre><code>
+  &lt;form&gt;
+    &lt;label for="f16"&gt;time類型&lt;/label&gt;
+    &lt;input type="time" id="f16"&gt;&lt;p&gt;&lt;/p&gt;
+  &lt;/form&gt;
+              </code></pre>
+              <div>
+                <form>
+                  <label for="f17">week類型</label>
+                  <input type="week" id="f17"><p></p>    
+                </form>
+              </div>
+              <p class="text-danger">HTML原始碼：</p>
+              <pre><code>
+  &lt;form&gt;
+    &lt;label for="f17"&gt;week類型&lt;/label&gt;
+    &lt;input type="week" id="f17"&gt;&lt;p&gt;&lt;/p&gt;
+  &lt;/form&gt;
+              </code></pre>
+  
+              <p>除上述類型之外，輸入標籤input表單還有包含checkbox與radio類型，checkbox設定核取方塊，用於多選，因此每個checkbox使用不同name屬性值，radio設定選項，用於單選，，因此每個radio使用相同name屬性值。</p>
+              <div>
+                <form>
+                  <div>
+                    興趣 
+                    <input type="checkbox" value="1" name="h1">登山 
+                    <input type="checkbox" value="2" name="h2">購物<p></p>
+                    性別 
+                    <input type="radio" value="f" name="gender">女 
+                    <input type="radio" value="m" name="gender">男
+                  </div>
+                </form>
+              </div>
+              <p class="text-danger">HTML原始碼：</p>
+              <pre><code>
+  &lt;form&gt;
+    興趣 
+    &lt;input type="checkbox" value="1" name="h1"&gt;登山 
+    &lt;input type="checkbox" value="2" name="h2"&gt;購物&lt;p&gt;&lt;/p&gt;
+    性別 
+    &lt;input type="radio" value="f" name="gender"&gt;女 
+    &lt;input type="radio" value="m" name="gender"&gt;男
+  &lt;/form&gt;
+              </code></pre>
+          </div>
+          <div class="px-3" id="pagetopic2">
+            <h5 style="color:rgb(96, 54, 192)">文字區域-textarea</h5>
+            <p>textarea標籤用於設定多行文字輸入，屬性包含 rows(指定列數)與cols(指定每列字數)。</p>
+            <div>
+              <form>
+                <textarea cols="40" rows="5"></textarea>
+              </form>
+            </div>
+            <p class="text-danger">HTML原始碼：</p>
+              <pre><code>
+  &lt;form&gt;
+    &lt;textarea cols="40" rows="5"&gt;&lt;/textarea&gt;
+  &lt;/form&gt;
+              </code></pre>
+          </div>
+  
+          <div class="px-3">
+            <h5 style="color:rgb(96, 54, 192)">下拉式方塊-select</h5>
+            <p>select標籤用於設定下拉式方塊選項，每個選項使用option標籤。</p>
+            <div>
+              <form>
+                <lable for="e1">教育程度</lable>
+                <select id="e1">
+                  <option value="1">高中(含)以下</option>
+                  <option value="2">大專</option>
+                  <option value="3">研究所以上</option>
+                </select>
+              </form>
+            </div>
+            <p class="text-danger">HTML原始碼：</p>
+              <pre><code>
+  &lt;form&gt;
+    &lt;label for="e1"&gt;教育程度&lt;/label&gt;
+    &lt;select id="e1"&gt;
+      &lt;option value="1"&gt;高中(含)以下&lt;/option&gt;
+      &lt;option value="2"&gt;大專&lt;/option&gt;
+      &lt;option value="3"&gt;研究所以上&lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/form&gt;
+              </code></pre>
+          </div>
+          
+      </div>
+    </div>
+
+    <!-- bootstrap js -->
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>  
+    
+    <!-- custom js -->
+    <script>
+      var menu_btn = document.querySelector("#menu-btn");
+      var sidebar = document.querySelector("#sidebar");
+      var container = document.querySelector(".my-container");
+      menu_btn.addEventListener("click", () => {
+        sidebar.classList.toggle("active-nav");
+        container.classList.toggle("active-cont");
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PHP</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+
+    <!-- Side-Nav -->
+    <div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+      <ul class="nav flex-column text-white w-100">
+        <li class="nav-item" style="background-color: #fff;padding-left:10px;padding-top:10px;border-bottom: rgb(255, 115, 0) 2px solid;font-size: 16pt;">
+          <p style="color:rgb(248, 138, 11);font-weight: 700;">PHP<br/>進階網頁程式設計</p>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a href="index.html" class="nav-link">簡介與軟體安裝</a></span>
+        </li>
+        <li class="nav-item">
+          <div class="nav-link" href="#topic1" class="nav-item" data-bs-toggle="collapse" aria-expanded="false" aria-controls="topic1">
+            <span class="mx-2">PHP-Basics</span>
+            <i class="fas fa-angle-right"></i>
+          </div>
+          <div class="collapse" id="topic1">
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic1.html">PHP基本語法</a></li>
+            </ul>
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic2.html">前端表單</a></li>
+            </ul>
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic3.html">PHP表單處理-1</a></li>
+            </ul>
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic4.html">PHP表單處理-2</a></li>
+            </ul>
+          </div>
+        </li>     
+      </ul>
+    </div>
+
+
+    <!-- Main Wrapper -->
+    <div class="p-2 my-container active-cont">
+      <!-- Breadcrumb -->
+      <div class="bg-light px-5" aria-label="breadcrumb" style="height:40px;position:fixed;width:100%;top:0;">
+        <a class="btn border-0" id="menu-btn" style="position:fixed"><i class="fas fa-bars"></i></a>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">簡介與軟體安裝</li>
+        </ol>
+      </div>
+      <!--End Top Nav -->
+
+      <!-- main page -->
+      <div style="margin-top:50px;">
+        <h3 class="text-danger p-3">內容涵蓋</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          <ul>
+            <li><a href="#pagetopic1">簡介</a></li>
+            <li><a href="#pagetopic2">軟體安裝-Xampp</a></li>
+            <li><a href="#pagetopic3">安裝環境確認</a></li>
+            <li><a href="#pagetopic4">PHP程式編輯軟體安裝-VS Code</a></li>
+          </ul>
+        </p>
+        <h3 class="text-danger p-3" id="pagetopic1">簡介</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          PHP(<a href="https://www.php.net/" target="_blank">https://www.php.net/</a>)的全名為Hypertext Preprocessor，它是個被廣泛運用在網頁程式撰寫的語言，它能適用於網頁程式的開發及能夠嵌入HTML文件之中。網頁與網頁伺服器利用CGI進行溝通，CGI(Common Gateway Interface)稱為共通閘道介面，PHP、ASP.NET等均為CGI技術 。PHP主要運用於伺服器端的程式語言，不同於ASP.NET，PHP為一內嵌語言如同JavaScript，使用者藉由將PHP程式碼嵌入HTML中來顯示伺服器端個執行結果。要運用PHP於伺服器端，系統必需要有：PHP的剖析器(CGI或Server模組)、網站伺服器與是網頁瀏灠器。 請注意php檔無法直接用瀏覽器開啟，必須藉由網頁伺服器的幫助 。以下為使用者端呼叫遠端php的處理流程。
+        </p>
+        <img src="imgs/introduction/intro-1.png"/>
+        <h3 class="text-danger p-3" id="pagetopic2">軟體安裝-XAMPP</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          課程所需軟體包含PHP、Apache網易伺服器與MySQL資料庫，使用者可選擇個別安裝或使用整合套件，課程程將使用整合套件(XAMPP)。XAMPP(<a href="https://www.apachefriends.org/zh_tw/index.html" target="_blank">https://www.apachefriends.org/zh_tw/index.html</a>是一個整合性PHP開發環境，使用者只須下載套件、並勾選安裝套件即可。連結至XAMPP官網、點選下載並選擇最新版本PHP，下載後，請選擇下圖套件進行安裝。請注意：課程套件僅需Apache(網頁伺服器)、MySQL(資料庫)、PHP、PHPMyAdmin(MySQL管理程式)，圖4中不須安裝Bitnami，因為安全性關係，每次使用都需進入XAMPP控制台(control panel)開啟Apache與MySQL，如需要更改組態設定或管理MySQL，請選擇Config，管理MySQL需要帳號登入，帳號為root，預設沒有密碼。
+        </p>
+        <p class="px-3"><img src="imgs/introduction/xampp-1.png"/></p>
+        <p class="px-3"><img src="imgs/introduction/xampp-2.png"/></p>
+        <p class="px-3"><img src="imgs/introduction/xampp-3.png"/></p>
+        <p class="px-3"><img src="imgs/introduction/xampp-4.png"/></p>
+        <p class="px-3"><img src="imgs/introduction/xampp-5.png"/></p>
+        
+        <h3 class="text-danger p-3" id="pagetopic3">安裝環境確認</h3>
+        <p class="p-3">XAMPP預設安裝於C磁碟機中xampp目錄，目錄中的htdocs目錄為網站根目錄，所有的網頁、圖片、影片、檔案、樣式、字型等均須至於htdocs目錄中，要測試安裝是否成功，請先使用XAMPP控制台(control panel)開啟Apache，之後開啟瀏覽器並在網址列輸入 <span class="text-danger">localhost</span> ，如果有出現下圖結果，代表安裝成功。
+        </p>
+        <p class="p-3"><img src="imgs/introduction/xampp-6.png"/></p>
+          <h3 class="text-danger px-3" id="pagetopic4">PHP程式編輯軟體安裝-VS Code</h3>
+          <p class="p-3">
+            PHP程式編輯軟體使用開源VS Code(<a href="https://code.visualstudio.com/" target="_blank">https://code.visualstudio.com/</a>)，下載安裝後，請安裝PHP intellisense延伸模組(選擇VS Code最左邊選項圖示中最後一個)，輸入PHP intellisense並點選安裝。
+          </p>
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- bootstrap js -->
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>  
+    
+    <!-- custom js -->
+    <script>
+      var menu_btn = document.querySelector("#menu-btn");
+      var sidebar = document.querySelector("#sidebar");
+      var container = document.querySelector(".my-container");
+      menu_btn.addEventListener("click", () => {
+        sidebar.classList.toggle("active-nav");
+        container.classList.toggle("active-cont");
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PHP</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+
+    <!-- Side-Nav -->
+    <div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+      <ul class="nav flex-column text-white w-100">
+        <li class="nav-item" style="background-color: #fff;padding-left:10px;padding-top:10px;border-bottom: rgb(255, 115, 0) 2px solid;font-size: 16pt;">
+          <p style="color:rgb(248, 138, 11);font-weight: 700;">PHP<br/>進階網頁程式設計</p>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a href="index.html" class="nav-link">簡介與軟體安裝</a></span>
+        </li>
+        <li class="nav-item">
+          <div class="nav-link" href="#topic1" class="nav-item" data-bs-toggle="collapse" aria-expanded="false" aria-controls="topic1">
+            <span class="mx-2">PHP-Basics</span>
+            <i class="fas fa-angle-right"></i>
+          </div>
+          <div class="collapse" id="topic1">
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic1.html">PHP基本語法</a></li>
+            </ul>
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic2.html">前端表單</a></li>
+            </ul>
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic3.html">PHP表單處理-1</a></li>
+            </ul>
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic4.html">PHP表單處理-2</a></li>
+            </ul>
+          </div>
+        </li>     
+      </ul>
+    </div>
+
+
+    <!-- Main Wrapper -->
+    <div class="p-2 my-container active-cont">
+      <!-- Breadcrumb -->
+      <div class="bg-light px-5" aria-label="breadcrumb" style="height:40px;position:fixed;width:100%;top:0;">
+        <a class="btn border-0" id="menu-btn" style="position:fixed"><i class="fas fa-bars"></i></a>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">PHP基本語法</li>
+        </ol>
+      </div>
+      <!--End Top Nav -->
+
+      <!-- main page -->
+      <div style="margin-top:50px;" id="pagetop">
+        <h3 class="text-danger p-3">內容涵蓋</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          <ul>
+            <li><a href="#pagetopic1">網頁標籤</a></li>
+            <li><a href="#pagetopic2">PHP標籤、變數與資料類型</a></li>
+            <li><a href="#pagetopic3">條件、迴圈、陣列處理與函數</a></li>
+          </ul>
+        </p>
+
+        <h3 class="text-danger p-3" id="pagetopic1">網頁標籤</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          PHP網頁附檔名為 <span class="text-danger">.php</span>，必須置於網站根目錄並藉由網頁伺服器解析才能執行，PHP語法藉由標籤 <span class="text-danger">&lt;?php ?&gt;</span>內嵌於網頁檔，要設計PHP網頁首先要了解基本HTML標籤(tag)及其對應屬性應用，本單元僅介紹常用HTML標籤及其屬性，詳細的介紹，請參考<a href="https://www.w3schools.com/html/" target="_blank">W3Schools HTML</a>。
+        </p>
+        <h5 class="p-3">網頁檔架構與標籤介紹</h5>
+        <p class="px-3">
+          網頁檔案內容架構如下：
+<pre class="px-3"><code>
+  &lt;html&gt;
+    &lt;head&gt;
+      &lt;!--網頁註解格式(設定內嵌utf-8編碼) --&gt;
+      &lt;meta charset="utf-8"&gt;
+
+      &lt;!--網頁註解格式(設定內嵌JavaScript) --&gt;
+      &lt;script&gt;
+
+      &lt;/script&gt;
+
+      &lt;!--網頁註解格式(設定內嵌CSS樣式) --&gt;
+      &lt;style&gt;
+
+      &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+      &lt;!--網頁顯示內容 --&gt;
+    &lt;/body&gt;
+  &lt;/html&gt;
+</code></pre>
+        </p><p class="px-3">
+          檔頭區塊(head)用於設定詮釋資料包含編碼設定(charset)、抬頭設定(title)、JavaScript設定與樣式CSS設定等，所有的顯示內容請至於body區塊。如同檔案內容架構所示，HTML標籤格式為<span class="text-danger">&lt;標籤名稱&gt;</span>，顯示內容至於開始標籤與結束標籤之間，結束標籤為<span class="text-danger">&lt;/標籤名稱&gt;</span>，但是也有少數標籤為自我結束標籤(self closing tag)其格式為<span class="text-danger">&lt;標籤名稱/&gt;</span>。標籤名稱一般為英文縮寫，例如標題英文為(heading)，因此HTML的六種預設標題標籤名稱為h1到h6。
+        </p>
+        <p class="px-3">
+          HTML標籤除了標籤名稱之外，最重要的是標籤屬性(attribute)設定，網頁內容利用標籤名稱指定內容的類別，之後利用標籤屬性來設定內容的細項，標籤屬性格式為<span class="text-danger">&lt;標籤名稱 屬性名稱="屬性值" &gt;</span>，以常用自我結束圖片標籤img為例，<span class="text-danger">&lt;img src="圖片檔案位置" &gt;</span>中屬性src用於設定圖片檔案位置，了解HTML標籤格式後，接下來介紹常用HTML標籤。
+        </p>
+        <div class="px-3">
+        <h5>常用標籤-檔頭位置標籤h</h5>
+        <p>
+          標籤h預設用於設定標題，有六種預設大小(h1到h6)，標題標籤預設會跳行，使用者可以搭配CSS改變標題樣式。範例結果：
+        </p>
+        <h1 style="display:inline-block">h1</h1>, <h2 style="display:inline-block">h2</h2>, <h3 style="display:inline-block">h3</h3>
+        <p class="text-danger">HTML原始碼：</p>
+        <pre><code>
+&lt;h1&gt;h1&lt;/h1&gt;
+&lt;h2&gt;h2&lt;/h2&gt;
+&lt;h3&gt;h2&lt;/h3&gt;
+        </code></pre>
+        
+        </div>
+        <div class="px-3">
+          <h5>常用標籤-段落p</h5>
+          <p>
+            標籤p用於設定段落內容，每個段落有預設間距，使用者可以搭配CSS改變段落樣式。段落內跳行請使用分行&lt;br/&gt;標籤。範例結果：
+          </p>
+          <p>南臺科技大學<br/>資訊管理系</p>
+          <p class="text-danger">HTML原始碼：</p>
+          <pre><code>
+&lt;p&gt;南臺科技大學&lt;br/&gt;資訊管理系&lt;/p&gt;
+          </code></pre>
+        </div>
+        <div class="px-3">
+          <h5>常用標籤-圖片img</h5>
+              <p>
+                標籤img用於網頁圖片，常用屬性包含src與alt，src用於設定圖片檔案名稱，圖片檔位置則相對網頁本身，當無法取得圖片時，alt用於設定顯示文字，img標籤雖可使用width(寬)或height(高)來設定圖片大小，一般仍建議使用樣式來進行控制。範例結果：
+              </p>
+              <p><img src="imgs/introhtml/imgtag.png" alt="南臺校徽"/></p>
+              <p class="text-danger">HTML原始碼：</p>
+              <pre><code>
+&lt;p&gt;&lt;img src="imgs/introhtml/imgtag.png" alt="南臺校徽"/&gt;
+              </code></pre>
+        </div>
+
+        <div class="px-3">
+          <h5>常用標籤-超連結a</h5>
+              <p>
+                標籤a用於設定超連結，常用屬性包含href與target，href用於連結對象，如果連結對象為網站內的資源，請使用相對檔案位置，如果連結對象為網站外部資源，請使用絕對位置(必須指定全部網址)，href值如果設為 # 則代標空連結。target用於設定連結內容顯示頁面，當設定為 _blank 時，瀏覽器會開新的頁面顯示連結內容，不指定則內容會顯示在現有的頁面。範例結果：
+              </p>
+              <p><a href="imgs/introhtml/imgtag.png">內部連結南臺校徽</a>, <a href="https://www.stust.edu.tw/tc/images/about/logo.png">外部連結南臺校徽</a>, <a href="imgs/introhtml/imgtag.png" target="_blank">新頁面內部連結南臺校徽</a></p>
+              <p class="text-danger">HTML原始碼：</p>
+              <pre><code>
+&lt;a href="imgs/introhtml/imgtag.png"&gt;內部連結南臺校徽&lt;/a&gt;
+&lt;a href="https://www.stust.edu.tw/tc/images/about/logo.png"&gt;外部連結南臺校徽&lt;/a&gt;
+&lt;a href="imgs/introhtml/imgtag.png" target="_blank"&gt;新頁面內部連結南臺校徽&lt;/a&gt;
+              </code></pre>
+        </div>
+        <div class="px-3">
+          <h5>常用標籤-表格table</h5>
+            <p>
+              標籤table用於設定表格，tr 標籤代表表格列，tr 標籤個數代表表格列個數，儲存格使用 th 與 td 標籤，th 用於設定表格標題，td 用於設定一般儲存格，表格也提供合併儲存格功能，透過 th 與 td 標籤中 rowspan 與 colspan 屬性設定合併列或合併欄，表格格式一般使用樣式進行設定。範例結果：
+            </p>
+            <div>
+              <table class="table table-bordered border-primary" style="width: fit-content;">
+                <tr>
+                  <th>標題1</th>
+                  <th>標題2</th>
+                </tr>
+                <tr>
+                  <td>內容1</td>
+                  <td>內容2</td>
+                </tr>
+              </table>
+            </div>
+            <p class="text-danger">HTML原始碼：</p>
+            <pre><code>
+&lt;table class="table table-bordered border-primary" style="width: fit-content;"&gt;
+  &lt;tr&gt;
+    &lt;th&gt;標題1&lt;/th&gt;
+    &lt;th&gt;標題2&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;內容1&lt;/td&gt;
+    &lt;td&gt;內容2&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+            </code></pre>                     
+            <div>
+              <table class="table table-bordered border-primary" style="width: fit-content;">
+                <tr>
+                  <th rowspan="2">合併列標題</th>
+                  <td>內容1</td>
+                </tr>
+                <tr>
+                  <td>內容2</td>
+                </tr>
+              </table>
+            </div>
+            <p class="text-danger">HTML原始碼：</p>
+            <pre><code>
+&lt;table class="table table-bordered border-primary" style="width: fit-content;"&gt;
+  &lt;tr&gt;
+    &lt;th rowspan="2"&gt;合併列標題1&lt;/th&gt;
+    &lt;td&gt;內容1&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;內容2&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+            </code></pre>
+            <div>
+              <table class="table table-bordered border-primary" style="width: fit-content;">
+                <tr>
+                  <th colspan="2">合併欄標題</th>
+                </tr>
+                <tr>
+                  <td>內容1</td>
+                  <td>內容2</td>
+                </tr>
+              </table>
+            </div>
+            <p class="text-danger">HTML原始碼：</p>
+            <pre><code>
+  &lt;table class="table table-bordered border-primary" style="width: fit-content;"&gt;
+    &lt;tr&gt;
+      &lt;th colspan="2"&gt;合併欄標題1&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;內容1&lt;/td&gt;
+      &lt;td&gt;內容2&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+            </code></pre>
+        </div>
+        <div class="px-3">
+          <h5>常用標籤-項目ul</h5>
+              <p>
+                標籤ul用於設定無編號項目，ul標籤中每個項目使用li標籤，可藉由樣式設定不同樣式符號等。範例結果：
+              </p>
+              <p>
+                <ul>
+                  <li>項目1</li>
+                  <li>項目2</li>
+                  <li>項目3</li>
+                </ul>
+              </p>
+              <p class="text-danger">HTML原始碼：</p>
+              <pre><code>
+&lt;ul&gt;
+  &lt;li&gt;項目1&lt;/li&gt;
+  &lt;li&gt;項目2&lt;/li&gt;
+  &lt;li&gt;項目3&lt;/li&gt;
+&lt;/ul&gt;
+              </code></pre>
+        </div>
+
+        <div class="px-3">
+          <h5>常用標籤-符號ol</h5>
+              <p>
+                標籤ol用於設定編號項目，ol標籤中每個項目使用li標籤，可藉由樣式設定不同樣式編號等。範例結果：
+              </p>
+              <p>
+                <ol>
+                  <li>編號1</li>
+                  <li>編號2</li>
+                  <li>編號3</li>
+                </ol>
+              </p>
+              <p class="text-danger">HTML原始碼：</p>
+              <pre><code>
+&lt;ol&gt;
+  &lt;li&gt;編號1&lt;/li&gt;
+  &lt;li&gt;編號2&lt;/li&gt;
+  &lt;li&gt;編號3&lt;/li&gt;
+&lt;/ol&gt;
+              </code></pre>
+        </div>
+
+        <div class="px-3">
+          <h5>方塊區域標籤-div與span</h5>
+              <p>
+                標籤div與span用於網頁方形區域位置設定，不同div區塊會跳行，span預設在同一行，例如在同一行中的某些內容要改變樣式，則可使用span。範例結果：
+              </p>
+              <div style="width:150px;height:150px;border:#f00 1px solid;">div方塊大小150 x 150紅色1點邊框</div><br/>              
+              <p class="text-danger">HTML原始碼：</p>
+              <pre><code>
+&lt;div style="width:150px;height:150px;border:#f00 1px solid;"&gt;div方塊大小150 x 150紅色1點邊框&lt;/div&gt;
+              </code></pre>
+              <p>段落文字要顯示<span style="color:#f00">紅色</span>部分</p>
+              <p class="text-danger">HTML原始碼：</p>
+              <pre><code>
+&lt;p&gt;段落文字要顯示&lt;span style="color:#f00"&gt;紅色&lt;/span&gt;部分&lt;/p&gt;
+              </code></pre>
+        </div>
+
+        <div class="px-3">
+          <h5>檔頭位置標籤-header</h5>
+          <p>用於設定所在區域標籤檔頭位置。</p>
+          <div style="position:relative;height:300px;border:steelblue 1px solid;">
+            <header style="position:absolute;top:0;">
+              <h5 style="color:rgb(96, 54, 192)">檔頭位置標籤header</h5>
+            </header>
+          </div>
+          <p class="text-danger">HTML原始碼：</p>
+            <pre><code>
+&lt;div style="position:relative;height:300px;border:steelblue 1px solid;"&gt;
+  &lt;header style="position:absolute;top:0;"&gt;
+    &lt;h3&gt;檔頭位置標籤header&lt;/h3&gt;
+  &lt;/header&gt;
+&lt;/div&gt;
+            </code></pre>
+        </div>
+
+        <div class="px-3">
+          <h5>註腳位置標籤-footer</h5>
+          <p>在網頁檔head區域內，用於連結外部樣式檔案。</p>
+          <div style="position:relative;height:300px;border:steelblue 1px solid;">
+            <footer style="position:absolute;bottom:0;">
+              <h5 style="color:rgb(96, 54, 192)">註腳位置標籤footer</h5>
+            </footer>
+          </div>
+          <p class="text-danger">HTML原始碼：</p>
+            <pre><code>
+&lt;link div style="position:relative;height:300px;border:steelblue 1px solid;"&gt;
+  &lt;footer style="position:absolute;bottom:0;"&gt;
+    &lt;h3&gt;註腳位置標籤footer&lt;/h3&gt;
+  &lt;/footer&gt;
+&lt;/div&gt;
+            </code></pre>
+        </div>
+
+        <div class="px-3">
+          <h5>連結外部樣式-link</h5>
+          <p>用於連結外部檔案，常用屬性為rel與href，rel用於設定網頁檔與連接檔案關係，最常用rel設定為stylesheet，用於設定外部連接檔案為樣式檔，href用於設定連接檔案位置。以下範例用於連結最為普遍樣式庫Bootstrap。</p>
+          <p class="text-danger">HTML原始碼：</p>
+            <pre><code>
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" 
+integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous"&gt;
+            </code></pre>
+        </div>
+
+        <div class="px-3">
+          <h5>聲音-audio</h5>
+          <p>audio標籤用於撥放聲音檔，支援格式包含MP3、WAV與OGG，請注意Apple Safari瀏覽器不支援OGG格式，audio常用屬性包含 controls(用於設定顯示控制按鈕)、autoplay(用於設定自動撥放)、muted(靜音)，audio標籤會包含source標籤用於設定聲音檔來源(src)與格式(type)，請注意：可以設定多種格式，audio會對音源檔由上而下檢查是否可以撥放。</p>
+          <div>
+            <audio controls autoplay muted>
+              <source src="imgs/introhtml/audiosample.ogg" type="audio/ogg">
+              <source src="imgs/introhtml/audiosample.mp3" type="audio/mp3">
+              瀏覽器不支援音樂撥放
+            </audio>
+          </div>
+          <p class="text-danger">HTML原始碼：</p>
+            <pre><code>
+&lt;audio controls autoplay muted&gt;
+  &lt;source src="imgs/introhtml/audiosample.ogg" type="audio/ogg"&gt;
+  &lt;source src="imgs/introhtml/audiosample.mp3" type="audio/mp3"&gt;
+  瀏覽器不支援音樂撥放
+&lt;/audio&gt;
+            </code></pre>
+        </div>
+
+        <div class="px-3">
+          <h5>影片-video</h5>
+          <p>video標籤用於撥放影片檔，支援格式包含MP4、WebM與OGG，請注意Apple Safari瀏覽器不支援OGG格式，video常用屬性包含 controls(用於設定顯示控制按鈕)、autoplay(用於設定自動撥放)、muted(靜音)、width(撥放器寬)、height(撥放器高)、poster(載入時顯示圖片檔)，video標籤會包含source標籤用於設定影片檔來源(src)與格式(type)，請注意：可以設定多種格式，video會對影片檔由上而下檢查是否可以撥放。</p>
+          <div>
+            <video controls muted width="50%">
+              <source src="imgs/introhtml/videosample.ogg" type="video/ogg">
+              <source src="imgs/introhtml/videosample.mp4" type="video/mp4">
+              瀏覽器不支援音樂撥放
+            </video>
+          </div>
+          <p class="text-danger">HTML原始碼：</p>
+            <pre><code>
+&lt;video controls muted&gt;
+  &lt;source src="imgs/introhtml/videosample.ogg" type="video/ogg"&gt;
+  &lt;source src="imgs/introhtml/videosample.mp4" type="video/mp4"&gt;
+  瀏覽器不支援影片撥放
+&lt;/video&gt;
+            </code></pre>
+        </div>
+
+        <h3 class="text-danger p-3" id="pagetopic2">PHP標籤、變數與資料類型</h3>
+        <p class="px-3">
+          PHP命令內嵌於網頁附檔名為 <span class="text-danger">.php</span>，所有PHP命令均包含在標籤 <span class="text-danger">&lt;?php ?&gt;</span>中，請開啟VS Code並選擇 <span class="text-danger">檔案-開啟資料夾</span> 開啟XAMPP htdocs資料夾後，選擇 開啟檔案並將檔案名稱設為 php1.php，接下來我們將說明 PHP基本語法、變數、資料類型與命令。
+          <ul class="text-danger">
+            <li>
+              PHP每個執行命令必須以「;」結束。變數名稱分大小寫、並且以$開始，不須事先定義資料類型。註解使用「//」雙斜線。
+            </li>
+            <li>
+              基本運算符號包含 +, -, *, /, %(求餘數)。
+            </li>
+            <li>
+              條件比較包含 &gt;, &gt;=, ==, !=(不等於), &lt;=, &lt;, &&(且), ||(或), ~(否定)。
+            </li>
+            <li>
+              多個字串串接使用「.」符號，例如 "abc"."def" 會將字串 "abc" 與 字串 "def" 進行串接。
+            </li>
+            <li>
+              資料類型包含文字(包含於雙引號或單引號中)、整數、浮點數(有小數)、布林值(true或false)、陣列、物件與空值(null)。
+            </li>
+          </ul>
+        </p>
+        <div class="px-3">
+          <p>PHP輸出命令為 <span class="text-danger">echo</span> ，接下來將利用php1.php說明不同類型echo輸出。</p>
+          <p class="text-danger">php1.php</p>
+            <pre><code>
+&lt;? php
+  //輸出值
+  echo 1;
+  echo "STUST";
+  //輸出包含HTML標籤值
+  echo "&lt;h1&gt;STUST&lt;/h1&gt;";
+  //字串串接
+  echo "abc".'def';
+  //輸出運算
+  echo 1+2+3;
+  //設定變數
+  $a="南臺";
+  $b='科技大學';
+  echo "&lt;h1&gt;".$a.$b."&lt;/h1&gt;"
+?&gt;
+            </code></pre>
+          <p>PHP字串如果置於雙引號中，則該字串具有變數解析的功能，也就是說，雙引號中可以包含 $變數名稱 ，進行運算時會將該變數值解析近來，將利用php1.php進行說明。</p>
+          <p class="text-danger">php1.php</p>
+            <pre><code>
+&lt;? php
+  //變數解析
+  $a="南臺科技大學";
+  $b="資訊管理系";
+  echo "$a $b";
+?&gt;
+            </code></pre>
+            <p>PHP字串如果包含需多行時，可利用長字串變數來進行定義，將利用php1.php進行說明。</p>
+          <p class="text-danger">php1.php</p>
+            <pre><code>
+&lt;? php
+  //3個&lt;之後的為長字串變數名稱，長字串結束使用長字串變數名稱加上;
+  //請注意長字串變數名稱之後不可加上空白
+  $a=&lt;&lt;&lt;myVar
+  &lt;p&gt;1&lt;/p&gt;
+  &lt;p&gt;2&lt;/p&gt;
+  &lt;p&gt;3&lt;/p&gt;
+  &lt;p&gt;4&lt;/p&gt;
+  myVar;
+  echo $a;
+?&gt;
+            </code></pre>
+        </div>
+        <h3 class="text-danger p-3" id="pagetopic3">條件、迴圈、陣列處理與函數</h3>
+        <div class="px-3">
+          <p>PHP條件包含 if, if else及if elseif else及switch，接下來將利用php1.php說明不同類型echo輸出。</p>
+          <p class="text-danger">php1.php</p>
+            <pre><code>
+&lt;? php
+  //if
+  if (1==1) {
+    echo "1==1";
+  }
+  //if elseif
+  if (1&gt;1) {
+    echo "1&gt;1";
+  } esle {
+    echo "1不大於1";
+  }
+  //if elseif else
+  if (2&lt;1) {
+    echo "2&lt;1";
+  } elseif (2&lt;2) {
+    echo "2&lt;2";
+  } else {
+    echo "2不小於2";
+  }
+  //switch
+  $a=4;
+  switch ($a) {
+    case 1:
+      echo 1;
+      break;
+    case 2:
+      echo 2;
+      break;
+    default:
+      echo "前面條件都不對時";
+  }
+?&gt;
+            </code></pre>
+          <p>PHP迴圈包含for, while, foreach，foreach搭配陣列使用，PHP陣列使用 array()函數來產生陣列，將利用php1.php進行說明。</p>
+          <p class="text-danger">php1.php</p>
+            <pre><code>
+&lt;? php
+  //for迴圈(變數=起始值;終止條件;每次增加值)
+  for ($i=1;$i&lt;=10;$i++) {
+    echo "$i, ";
+  }
+  echo "&lt;br/&gt;";
+  $i=1;
+  //while迴圈
+  while ($i&lt;=10) {
+    echo "$i, ";
+  }
+  echo "&lt;br/&gt;";
+  //利用array函數產生10元素陣列
+  $i=array(1,2,3,4,5,6,7,8,9,10);
+  //foreach (陣列變數 as 元素值變數)
+  foreach ($i as $j) {
+    echo "$j, ";
+  }
+  //foreach (陣列變數 as 位置變數=>元素值變數)
+  foreach ($i as $idx=>$j) {
+    echo "第 $idx 個變數值為 $j, ";
+  }
+?&gt;
+            </code></pre>
+            <p>PHP函數定義可設定代入值，如有回傳值則使用 return命令，將利用php1.php進行說明。</p>
+          <p class="text-danger">php1.php</p>
+            <pre><code>
+&lt;? php
+  //定義函數mysum代入兩個數並傳回兩數加總
+  function mysum($i,$j) {
+    return $i+$j;
+  }
+  echo mysum(10,20);
+?&gt;
+            </code></pre>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- bootstrap js -->
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>  
+    
+    <!-- custom js -->
+    <script>
+      var menu_btn = document.querySelector("#menu-btn");
+      var sidebar = document.querySelector("#sidebar");
+      var container = document.querySelector(".my-container");
+      menu_btn.addEventListener("click", () => {
+        sidebar.classList.toggle("active-nav");
+        container.classList.toggle("active-cont");
+      });
+    </script>
+  </body>
+</html>
