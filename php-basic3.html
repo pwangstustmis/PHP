@@ -33,10 +33,10 @@
               <li class="menuitem"><a class="nav-link" href="php-basic2.html">前端表單</a></li>
             </ul>
             <ul>
-              <li class="menuitem"><a class="nav-link" href="php-basic3.html">PHP表單處理-1</a></li>
+              <li class="menuitem"><a class="nav-link" href="php-basic3.html">PHP表單處理-兩個網頁檔</a></li>
             </ul>
             <ul>
-              <li class="menuitem"><a class="nav-link" href="php-basic4.html">PHP表單處理-2</a></li>
+              <li class="menuitem"><a class="nav-link" href="php-basic4.html">PHP表單處理-一個網頁檔</a></li>
             </ul>
           </div>
         </li>     
@@ -50,7 +50,7 @@
       <div class="bg-light px-5" aria-label="breadcrumb" style="height:40px;position:fixed;width:100%;top:0;">
         <a class="btn border-0" id="menu-btn" style="position:fixed"><i class="fas fa-bars"></i></a>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item">PHP表單處理-1</li>
+          <li class="breadcrumb-item">PHP表單處理-兩個網頁檔</li>
         </ol>
       </div>
       <!--End Top Nav -->
@@ -60,66 +60,254 @@
         <h3 class="text-danger p-3">內容涵蓋</h3>
         <p class="px-3" style="margin-top:-20px;">
           <ul>
-            <li><a href="#pagetopic1">GET表單處理-$_GET</a></li>
-            <li><a href="#pagetopic2">POST表單-$_POST</a></li>
-            <li><a href="#pagetopic3">表單欄位檢查函數-isset、empty</a></li>
+            <li><a href="#pagetopic1">GET/POST表單處理-$_GET, $_POST</a></li>
+            <li><a href="#pagetopic2">表單陣列設定與處理</a></li>
+            <li><a href="#pagetopic3">JavaScript非同步傳輸-fetch</a></li>
+            <li><a href="#pagetopic4">表單欄位檢查函數-isset、empty</a></li>
           </ul>
         </p>
-        
-        <h3 class="text-danger p-3" >表單處理</h3>
-        <p class="px-3">表單依照傳送方法屬性(method="get"或method="post")分為GET表單處理與POST表單處理，GET表單將表單資料附加於網址列方式進行傳送，傳送大小最多約2K Bytes，POST表單將表單資料置於HTPP內容中傳送，接下來將針對GET表單與POST表單進行說明。</p>
+        <div class="px-3">
+          <p>兩個網頁檔表單處理是指由一個表單檔案呼叫另一個表單處理PHP檔案，以下列程式為例，表單檔(p1.html或p1.php)呼叫處理檔案(p2.php)，請注意表單檔案可以是HTML或PHP檔，取決於表單檔案是否包含PHP動作，但是表單處理程式需為PHP檔。表單檔method可為get或post，用於設定資料傳送方式，而action屬性用於設定表單處理程式，下列程式設定傳送方法為get，並指定p2.php為表單處理程式，表單使用Bootstrap，請下載Bootstrap、解壓縮、並將解壓縮檔中bootstrap.min.css複製至網站根目錄中css檔案夾。請自行建立網站根目錄css檔案夾。</p>
+          <p class="text-danger">p1.html或p2.php原始碼</p>
+          <pre><code>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;link rel="stylesheet" href="css/bootstrap.min.css"&gt;&lt;/link&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;form method="get" action="p2.php"&gt;
+      &lt;div class="form-group"&gt;
+        &lt;label for="f1"&gt;帳號&lt;/label&gt;
+        &lt;input type="text" class="form-control" id="f1" name="account"&gt;
+      &lt;/div&gt;
+      &lt;div class="form-group"&gt;
+        &lt;label for="f2"&gt;密碼&lt;/label&gt;
+        &lt;input type="text" class="form-control" id="f2" name="password"&gt;
+      &lt;/div&gt;
+      &lt;button type="submit" class="btn btn-primary" name="btn"&gt;登入&lt;/button&gt;
+    &lt;/form&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+        </code></pre>
+        <p class="text-danger">p2.php原始碼</p>
+          <pre><code>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;link rel="stylesheet" href="css/bootstrap.min.css"&gt;&lt;/link&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;?php
+    echo "傳送帳號:".$_GET["account"]."&lt;p&gt;";
+    echo "傳送密碼:".$_GET["password"]."&lt;p&gt;";
+  ?&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+        </code></pre>
         </div>
 
         <div class="px-3" id="pagetopic1">
-            <h5 style="color:rgb(96, 54, 192)">GET表單處理-$_GET</h5>
-            <p>GET表單中表單屬性method必須設為get，表單欄位必須設定 <span class="danger">name</span> 屬性，後端PHP程式可藉由 表單欄位 <span class="danger">name</span> 屬性值來取得該表單欄位值，使用者點選送出GET表單後，表單資料會利用網址列的方式(<span class="danger">xxx.php?欄位name值1=值1&欄位name值2=值2</span>，傳送資料會以陣列方式儲存於 <span class="danger">$_GET</span> 的系統變數，使用者可使用 <span class="danger">$_GET["表單欄位name值"]</span> 來取得使用者傳送欄位值，請注意$_GET為系統變數，一定要大寫。以php-1.html呼叫php-1.php為例說明傳送使用者帳號與密碼</p>
-            <p>程式說明:前端表單欄位id屬性用於前端控制，以帳號為例，label標籤中for="f1"設定，該標籤將用於標籤屬性id="f1"的欄位，如果前端表單需要使用JavaScript，請記得設定存取欄位的id，送出按鈕value屬性用於設定按鈕顯示值，樣式類別class則套用Bootstrap。</p>
-            <p class="text-danger">php-1.html原始碼：</p>
-            <pre><code>
-  &lt;form method="get" action="php-1.php"&gt;
-    &lt;label for="f1"&gt;帳號&lt;/label&gt;
-    &lt;input type="text" id="f1" name="account"&gt;&lt;p&gt;&lt;/p&gt;
-    &lt;label for="f2"&gt;密碼&lt;/label&gt;
-    &lt;input type="text" id="f2" name="password"&gt;&lt;p&gt;&lt;/p&gt;
-    &lt;input type="submit" class="btn btn-primary" name="btn" value="送出"&gt;
-  &lt;/form&gt;
-            </code></pre>
-            <p>程式說明:後端程式php-1.php顯示$_GET陣列中account與password值。</p>
-            <p class="text-danger">php-1.php原始碼：</p>
-            <pre><code>
-  &lt;?php
-    echo "帳號:".$_GET["account"]."&lt;br/&gt;";
-    echo "密碼:".$_GET["password"]."&lt;br/&gt;";
-  ?&gt;
-            </code></pre>        
-      </div>
-      <div class="px-3" id="pagetopic2">
-        <h5 style="color:rgb(96, 54, 192)">POST表單處理-$_POST</h5>
-        <p>POST表單中表單屬性method必須設為post，表單欄位必須設定 <span class="danger">name</span> 屬性，後端PHP程式可藉由 表單欄位 <span class="danger">name</span> 屬性值來取得該表單欄位值，使用者點選送出POST表單後，傳送資料會以陣列方式儲存於 <span class="danger">$_POST</span> 的系統變數，使用者可使用 <span class="danger">$_POST["表單欄位name值"]</span> 來取得使用者傳送欄位值，請注意$_POST為系統變數，一定要大寫。以php-1.html呼叫php-1.php為例說明傳送使用者帳號與密碼</p>
-        <p>程式說明:前端表單欄位id屬性用於前端控制，以帳號為例，label標籤中for="f1"設定，該標籤將用於標籤屬性id="f1"的欄位，如果前端表單需要使用JavaScript，請記得設定存取欄位的id，送出按鈕value屬性用於設定按鈕顯示值，樣式類別class則套用Bootstrap。</p>
-        <p class="text-danger">php-1.html原始碼：</p>
-        <pre><code>
-&lt;form method="post" action="php-1.php"&gt;
-&lt;label for="f1"&gt;帳號&lt;/label&gt;
-&lt;input type="text" id="f1" name="account"&gt;&lt;p&gt;&lt;/p&gt;
-&lt;label for="f2"&gt;密碼&lt;/label&gt;
-&lt;input type="text" id="f2" name="password"&gt;&lt;p&gt;&lt;/p&gt;
-&lt;input type="submit" class="btn btn-primary" name="btn" value="送出"&gt;
-&lt;/form&gt;
+          <h3 class="text-danger">GET/POST表單處理-$_GET, $_POST</h3>
+          <p>GET/POST表單處理取決於表單屬性method設定，如果method設為 <span class="text-danger">get</span>，則為GET表單，如果method設為 <span class="text-danger">post</span>，則為POST表單。不管是GET或POST表單，表單檔案中欄位必須設定 <span class="text-danger">name</span> 屬性，因為後端PHP程式可藉由表單欄位 <span class="text-danger">name</span> 屬性值來取得該表單欄位值。<br/>使用者送出GET表單後，表單資料會利用網址列的方式(<span class="text-danger">xxx.php?欄位name值1=值1&欄位name值2=值2</span> 傳送，而傳送資料會以陣列方式儲存於PHP <span class="text-danger">$_GET</span> 的系統變數，使用者可以在PHP處理程式使用 <span class="text-danger">$_GET["表單欄位name值"]</span> 來取得使用者傳送欄位值，請注意$_GET為系統變數，一定要大寫。<br/>如果使用者送出POST表單後，表單資料會經由HTTP request本體傳送至處理程式，而傳送資料會以陣列方式儲存於PHP <span class="text-danger">$_POST</span> 的系統變數，使用者可以在PHP處理程式使用 <span class="text-danger">$_POST["表單欄位name值"]</span> 來取得使用者傳送欄位值，請注意$_POST為系統變數，一定要大寫。先前為GET表單範例，下列程式表單檔(p1.htm)以POST方式呼叫處理檔案(p2.php)         
+          </p>
+          <p class="text-danger">p1.html或p2.php原始碼</p>
+          <pre><code>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;link rel="stylesheet" href="css/bootstrap.min.css"&gt;&lt;/link&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;form method="post" action="p2.php"&gt;
+      &lt;div class="form-group"&gt;
+        &lt;label for="f1"&gt;帳號&lt;/label&gt;
+        &lt;input type="text" class="form-control" id="f1" name="account"&gt;
+      &lt;/div&gt;
+      &lt;div class="form-group"&gt;
+        &lt;label for="f2"&gt;密碼&lt;/label&gt;
+        &lt;input type="text" class="form-control" id="f2" name="password"&gt;
+      &lt;/div&gt;
+      &lt;button type="submit" class="btn btn-primary" name="btn"&gt;登入&lt;/button&gt;
+    &lt;/form&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
         </code></pre>
-        <p>程式說明:後端程式php-1.php顯示$_POST陣列中account與password值。</p>
-        <p class="text-danger">php-1.php原始碼：</p>
-        <pre><code>
-&lt;?php
-echo "帳號:".$_POST["account"]."&lt;br/&gt;";
-echo "密碼:".$_POST["password"]."&lt;br/&gt;";
-?&gt;
-        </code></pre>        
+        <p class="text-danger">p2.php原始碼</p>
+          <pre><code>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;link rel="stylesheet" href="css/bootstrap.min.css"&gt;&lt;/link&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;?php
+    echo "傳送帳號:".$_POST["account"]."&lt;p&gt;";
+    echo "傳送密碼:".$_POST["password"]."&lt;p&gt;";
+  ?&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+        </code></pre>       
     </div>
+
+    <div class="px-3" id="pagetopic2">
+      <h3 class="text-danger">表單陣列設定與處理</h3>
+      <p>如果希望將表單欄位群組成一串傳送至後端PHP，則表單所有群組欄位 <span class="text-danger">name</span> 屬性必須設定為 <span class="text-danger">name="欄位變數[]"</span>，<span class="text-danger">name="欄位變數[]"</span> 設定會將這些群組欄位以陣列方式傳給PHP。下列範例讓使用者勾選興趣，興趣可以是多選，因此透過陣列方式來傳遞興趣欄位，請注意：PHP中 <span class="text-danger">count($陣列變數)</span> 會傳會陣列大小，陣列起始位置為 0，取得陣列方式為 <span class="text-danger">$陣列變數[位置值])</span>。
+      </p>
+      <p class="text-danger">p1.html或p2.php原始碼</p>
+      <pre><code>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;link rel="stylesheet" href="css/bootstrap.min.css"&gt;&lt;/link&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;form method="post" action="p2.php"&gt;
+      &lt;div class="form-check form-check-inline"&gt;
+        &lt;input class="form-check-input" type="checkbox" id="chk1" value="逛街" name="hobbies[]"&gt;
+        &lt;label class="form-check-label" for="chk1"&gt;逛街&lt;/label&gt;
+      &lt;/div&gt;
+      &lt;div class="form-check form-check-inline"&gt;
+        &lt;input class="form-check-input" type="checkbox" id="chk2" value="看電影" name="hobbies[]"&gt;
+        &lt;label class="form-check-label" for="chk2"&gt;看電影&lt;/label&gt;
+      &lt;/div&gt;
+      &lt;div class="form-check form-check-inline"&gt;
+        &lt;input class="form-check-input" type="checkbox" id="chk3" value="美食" name="hobbies[]"&gt;
+        &lt;label class="form-check-label" for="chk3"&gt;美食&lt;/label&gt;
+      &lt;/div&gt;
+      &lt;button type="submit" class="btn btn-primary" name="btn"&gt;登入&lt;/button&gt;
+    &lt;/form&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+    </code></pre>
+    <p class="text-danger">p2.php原始碼</p>
+      <pre><code>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;link rel="stylesheet" href="css/bootstrap.min.css"&gt;&lt;/link&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;?php
+    $hobbies=$_POST["hobbies"];
+    echo "興趣個數:".count($hobbies)."&lt;p&gt;";
+    foreach ($hobbies as $h)
+    echo "興趣:".$h."&lt;p&gt;";
+    ?&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+    </code></pre>       
+    </div>
+
     <div class="px-3" id="pagetopic3">
-        <h5 style="color:rgb(96, 54, 192)">表單欄位檢查函數-isset、empty</h5>
-        <p>後端PHP程式接收表單資料後，在取得表單欄位值之前，必須要判斷該欄位是否存在或該欄位是否有值，請注意：<span class="danger">如傳送未輸入文字欄位則該欄位沒有值("")，而核取方塊如為勾選，則該欄位不存在</span>。因此後端PHP利用函數 <span class="danger">empty</span> 檢查沒有值欄位，利用 <span class="danger">isset</span> 檢查不存在的欄位。兩個函數傳回值均為布林值true或false</p>
-        <p>練習：請在前一練習表單中加入興趣核取方塊，並在後端php-1.php程式中檢查帳號、密碼或興趣欄位、是否有輸入或勾選</p>      
+      <h3 class="text-danger">JavaScript非同步傳輸-fetch</h3>
+      <p>當使用者執行 GET/POST 表單時，網頁控制會從現在表單檔跳至PHP檔，可是有時候 <span class="text-danger">我們想要取得後端資源，可是希望網頁仍維持在現有的網頁</span>，這個時候我們就需要<span class="text-danger">非同步傳輸-fetch</span>，非同步傳輸-fetch可將資料上載至後端PHP程式，或者呼叫後端PHP程式下載資料，針對後端資料下載，課程僅說明text與JSON資料，其他資料格式請自行搜尋。(請注意:fetch會傳回一個response的promise物件)。</p>
+      <p class="text-danger">p1.html原始碼-取得p2.php得傳回 Hello! 您好! 文字</p>
+      <pre><code>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;link rel="stylesheet" href="css/bootstrap.min.css"&gt;&lt;/link&gt;
+    &lt;script&gt;
+      function getText() {
+        fetch('p2.php')
+        .then(function(response) {
+          return response.text();
+        })
+        .then(function(data) {
+          console.log(data);
+        });
+      }
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;button class="btn btn-primary" onclick="getText()"&gt;取得資料&lt;/button&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+      </code></pre>
+      <p class="text-danger">p2.php原始碼</p>
+          <pre><code>
+&lt;?php
+  echo "Hello! 您好!";
+?&gt;
+      </code></pre>
+      <p class="text-danger">p1.html原始碼-取得p2.php得傳回JSON</p>
+      <pre><code>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;link rel="stylesheet" href="css/bootstrap.min.css"&gt;&lt;/link&gt;
+    &lt;script&gt;
+      function getJson() {
+        fetch('p2.php')
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(data) {
+          console.log(data.school);
+        });
+      }
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;button class="btn btn-primary" onclick="getJson()"&gt;取得資料&lt;/button&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+      </code></pre>
+      <p class="text-danger">p2.php原始碼</p>
+      <pre><code>
+&lt;?php
+  echo json_encode(array("school"=>"南臺科技大學"));
+?&gt;
+      </code></pre>
+      <p>使用非同步傳輸-fetch上載資料，課程使用JavaScript FormData物件來進行資料上載，新增FormData物件後，我們利用 <span class="text-danger">document.getElementById("gender").value</span> 取得下拉式方塊值，並在表單資料物件中新增 gender 欄位，之後透 post 方法並藉由 body 屬性將表單資料物件傳送至 p2.php。請注意：JavaScript利用id屬性取得控制項。後端p2.php會根據傳送值回傳答案。</p>
+      <p class="text-danger">p1.html原始碼-取得p2.php得傳回文字</p>
+      <pre><code>
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;link rel="stylesheet" href="css/bootstrap.min.css"&gt;&lt;/link&gt;
+    &lt;script&gt;
+      function getText() {
+        var fdata=new FormData();
+        fdata.append('gender',document.getElementById("gender").value);
+        fetch('p2.php',
+        {
+          method:'post',
+          body:fdata
+        }).then(function(response) {
+          return response.text();
+        })
+        .then(function(data) {
+          console.log(data);
+        });
+      }
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;select id="gender"&gt;
+      &lt;option value="1"&gt;女&lt;/option&gt;
+      &lt;option value="2"&gt;男&lt;/option&gt;
+    &lt;/select&gt;
+    &lt;button class="btn btn-primary" onclick="getText()"&gt;取得資料&lt;/button&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+      </code></pre>
+      <p class="text-danger">p2.php原始碼</p>
+          <pre><code>
+&lt;?php
+  if ($_POST["gender"]==1)
+    echo "Hello! 女!";
+  else
+  echo "Hello! 男!";
+?&gt;
+      </code></pre>
+    </div>
+
+    <div class="px-3" id="pagetopic4">
+        <h3 class="text-danger">表單欄位檢查函數-isset、empty</h3>
+        <p>後端PHP程式接收表單資料後，必須要判斷該欄位是否存在或該欄位是否有值，請注意：<span class="danger">如傳送未輸入文字欄位則該欄位沒有值("")，而核取方塊如過沒有勾選，則該欄位不存在</span>。後端PHP使用函數 <span class="danger">empty</span> 檢查沒有值的欄位，使用 <span class="danger">isset</span> 檢查不存在的欄位。兩個函數傳回值均為布林值true或false</p>
+        <p class="text-danger">練習：請在前一練習表單中加入興趣核取方塊，並在後端p2.php程式中檢查帳號、密碼或興趣欄位、是否有輸入或勾選</p>      
     </div>
 
 

@@ -33,10 +33,10 @@
               <li class="menuitem"><a class="nav-link" href="php-basic2.html">前端表單</a></li>
             </ul>
             <ul>
-              <li class="menuitem"><a class="nav-link" href="php-basic3.html">PHP表單處理-1</a></li>
+              <li class="menuitem"><a class="nav-link" href="php-basic3.html">PHP表單處理-兩個網頁檔</a></li>
             </ul>
             <ul>
-              <li class="menuitem"><a class="nav-link" href="php-basic4.html">PHP表單處理-2</a></li>
+              <li class="menuitem"><a class="nav-link" href="php-basic4.html">PHP表單處理-一個網頁檔</a></li>
             </ul>
           </div>
         </li>     
@@ -63,6 +63,7 @@
             <li><a href="#pagetopic1">網頁標籤</a></li>
             <li><a href="#pagetopic2">PHP標籤、變數與資料類型</a></li>
             <li><a href="#pagetopic3">條件、迴圈、陣列處理與函數</a></li>
+            <li><a href="#pagetopic4">PHP基本命令練習</a></li>
           </ul>
         </p>
 
@@ -396,46 +397,48 @@ integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/
           </ul>
         </p>
         <div class="px-3">
-          <p>PHP輸出命令為 <span class="text-danger">echo</span> ，接下來將利用php1.php說明不同類型echo輸出。</p>
-          <p class="text-danger">php1.php</p>
+          <p>PHP輸出命令為 <span class="text-danger">echo</span> ，接下來將利用下列PHP程式碼說明不同類型echo輸出。</p>
+          <p class="text-danger">PHP程式碼</p>
             <pre><code>
-&lt;? php
-  //輸出值
+&lt;?php
+  //輸出數字文字，文字可包含於單引號或雙引號
   echo 1;
   echo "STUST";
-  //輸出包含HTML標籤值
+  //輸出值可結合HTML標籤
   echo "&lt;h1&gt;STUST&lt;/h1&gt;";
-  //字串串接
+  //輸出字串串接使用句點符號(.)
   echo "abc".'def';
-  //輸出運算
+  //輸出直接運算
   echo 1+2+3;
-  //設定變數
+  //輸出字串與運算串接，運算必須置於括號內
+  echo "答案".(1+2+3);
+  //輸出變數
   $a="南臺";
   $b='科技大學';
   echo "&lt;h1&gt;".$a.$b."&lt;/h1&gt;"
 ?&gt;
             </code></pre>
-          <p>PHP字串如果置於雙引號中，則該字串具有變數解析的功能，也就是說，雙引號中可以包含 $變數名稱 ，進行運算時會將該變數值解析近來，將利用php1.php進行說明。</p>
-          <p class="text-danger">php1.php</p>
+          <p>PHP字串需置於單引號或雙引號中，如果置於<span class="text-danger">雙引號</span>中，則該字串具有變數解析的功能，也就是說，雙引號中可以包含<span class="text-danger"> $變數名稱 </span>，變數解析只適用顛一變數解析，不適用於多個變數運算，將利用下列PHP程式碼進行說明。</p>
+          <p class="text-danger">PHP程式碼</p>
             <pre><code>
-&lt;? php
+&lt;?php
   //變數解析
   $a="南臺科技大學";
   $b="資訊管理系";
-  echo "$a $b";
+  echo "$a $b"; //變數至於雙引號內，執行echo輸出時會將變數值解析，輸出 南臺科技大學 資訊管理系
 ?&gt;
             </code></pre>
-            <p>PHP字串如果包含需多行時，可利用長字串變數來進行定義，將利用php1.php進行說明。</p>
-          <p class="text-danger">php1.php</p>
+            <p>長字串變數是將多行文字儲存於變數中，長字串變數類似一個多行的雙引號變數，因此在長字串變數中可以進行變數解析，在PHP中長字串變數多用於套表輸出，下列PHP程式碼定義長字串變數。</p>
+          <p class="text-danger">PHP程式碼</p>
             <pre><code>
-&lt;? php
+&lt;?php
   //3個&lt;之後的為長字串變數名稱，長字串結束使用長字串變數名稱加上;
   //請注意長字串變數名稱之後不可加上空白
+  $b="南臺科技大學";
   $a=&lt;&lt;&lt;myVar
-  &lt;p&gt;1&lt;/p&gt;
-  &lt;p&gt;2&lt;/p&gt;
-  &lt;p&gt;3&lt;/p&gt;
-  &lt;p&gt;4&lt;/p&gt;
+  --------------------&lt;br/&gt;
+  &lt;h1&gt;$b&lt;/h1&gt;
+  --------------------&lt;br/&gt;
   myVar;
   echo $a;
 ?&gt;
@@ -443,10 +446,10 @@ integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/
         </div>
         <h3 class="text-danger p-3" id="pagetopic3">條件、迴圈、陣列處理與函數</h3>
         <div class="px-3">
-          <p>PHP條件包含 if, if else及if elseif else及switch，接下來將利用php1.php說明不同類型echo輸出。</p>
-          <p class="text-danger">php1.php</p>
+          <p>PHP條件命令包含 if, if else及if elseif else及switch，接下來將利用下列PHP程式碼說明不同類型echo輸出。</p>
+          <p class="text-danger">PHP程式碼</p>
             <pre><code>
-&lt;? php
+&lt;?php
   //if
   if (1==1) {
     echo "1==1";
@@ -479,10 +482,10 @@ integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/
   }
 ?&gt;
             </code></pre>
-          <p>PHP迴圈包含for, while, foreach，foreach搭配陣列使用，PHP陣列使用 array()函數來產生陣列，將利用php1.php進行說明。</p>
-          <p class="text-danger">php1.php</p>
+          <p>PHP迴圈包含for, while, foreach，foreach搭配陣列使用，PHP陣列使用 array()函數來產生陣列，當使用者使用forach命令，有希望取得元素在陣列的位置值，可以另用將利用<span class="text-danger"> foreach (陣列變數 as 位置變數=>元素值變數)</span>，下列PHP程式碼進行說明。</p>
+          <p class="text-danger">PHP程式碼</p>
             <pre><code>
-&lt;? php
+&lt;?php
   //for迴圈(變數=起始值;終止條件;每次增加值)
   for ($i=1;$i&lt;=10;$i++) {
     echo "$i, ";
@@ -500,23 +503,38 @@ integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/
   foreach ($i as $j) {
     echo "$j, ";
   }
+  //利用array函數產生關聯式陣列
+  $k=array("台南"=>1,"高雄"=>2,"屏東"=>3);
+  //foreach (陣列變數 as 元素值變數)
+  foreach ($k as $idx=>$j) {
+    echo "$idx:值 $j, ";
+  }
   //foreach (陣列變數 as 位置變數=>元素值變數)
   foreach ($i as $idx=>$j) {
     echo "第 $idx 個變數值為 $j, ";
   }
 ?&gt;
             </code></pre>
-            <p>PHP函數定義可設定代入值，如有回傳值則使用 return命令，將利用php1.php進行說明。</p>
-          <p class="text-danger">php1.php</p>
+            <p>PHP函數定義可設定代入值，如有回傳值則使用 return命令，將利用下列PHP程式碼進行說明。</p>
+          <p class="text-danger">PHP程式碼</p>
             <pre><code>
-&lt;? php
+&lt;?php
   //定義函數mysum代入兩個數並傳回兩數加總
   function mysum($i,$j) {
     return $i+$j;
   }
   echo mysum(10,20);
 ?&gt;
-            </code></pre>
+            </code></pre>           
+        </div>
+        <h3 class="text-danger p-3" id="pagetopic4">PHP基本命令練習</h3>
+        <div class="px-3">
+          <p class="text-success">練習:請設定兩個數字變數並輸出4行結果，分別是這兩個變數的 +, -, &, /的結果，輸出格式如 數字1 + 數字2 = 結果。</p>
+            <p class="text-success">練習:請根據變數 $day 值(1~7)輸出星期一到星期日，請使用 if 與 switch命令。</p>
+            <p class="text-success">練習:請利用迴圈印出(同一行) 1,2,3,4,5,6,7,8,9,10。請利用迴圈印出(不同行) 1,2,3,4,5,6,7,8,9,10。</p>
+            <p class="text-success">練習:請利用迴圈印出陣列變數 $a=array(1,2,3,4,5,6,7,8,9,10)和。請使用 for 與 foreach 迴圈，陣列長度可藉由 count(陣列變數) 取得。</p>
+            <p class="text-success">練習:表格HTML標籤 table，列標籤 tr，每一欄 td。請利用 &lt;td style="height:35px;width:30px;background-color:#fff;"&gt;&lt;/td&gt; 與 &lt;td style="height:35px;width:30px;background-color:#000;"&gt;&lt;/td&gt; 印出 5 x 5棋盤。</p>
+            <p class="text-success">練習:請將上一題棋盤輸出設為函數 chess(代入變數)，函數代入值為棋盤大小，呼叫chess函數，印出 3 x 3 及 7 x 7棋盤。</p>
         </div>
 
       </div>
