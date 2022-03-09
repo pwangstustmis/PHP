@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PHP</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+
+    <!-- Side-Nav -->
+    <div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+      <ul class="nav flex-column text-white w-100">
+        <li class="nav-item" style="background-color: #fff;padding-left:10px;padding-top:10px;border-bottom: rgb(255, 115, 0) 2px solid;font-size: 16pt;">
+          <p style="color:rgb(248, 138, 11);font-weight: 700;">PHP<br/>進階網頁程式設計</p>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a href="index.html" class="nav-link">簡介與軟體安裝</a></span>
+        </li>
+        <li class="nav-item">
+          <div class="nav-link" href="#topic1" class="nav-item" data-bs-toggle="collapse" aria-expanded="false" aria-controls="topic1">
+            <span class="mx-2">PHP-Basics</span>
+            <i class="fas fa-angle-right"></i>
+          </div>
+          <div class="collapse" id="topic1">
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic1.html">PHP基本語法</a></li>
+            </ul>
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic2.html">前端表單</a></li>
+            </ul>
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic3.html">PHP表單處理-兩個網頁檔</a></li>
+            </ul>
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic4.html">PHP表單處理-一個網頁檔</a></li>
+            </ul>
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic5.html">PHP常用函數</a></li>
+            </ul>
+          </div>
+        </li>     
+      </ul>
+    </div>
+
+
+    <!-- Main Wrapper -->
+    <div class="p-2 my-container active-cont">
+      <!-- Breadcrumb -->
+      <div class="bg-light px-5" aria-label="breadcrumb" style="height:40px;position:fixed;width:100%;top:0;">
+        <a class="btn border-0" id="menu-btn" style="position:fixed"><i class="fas fa-bars"></i></a>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">PHP常用函數</li>
+        </ol>
+      </div>
+      <!--End Top Nav -->
+
+      <!-- main page -->
+      <div style="margin-top:50px;" id="pagetop">
+        <h3 class="text-danger p-3">內容涵蓋</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          <ul>
+            <li><a href="#pagetopic1">檢查函數-empty、isset</a></li>
+            <li><a href="#pagetopic2">字串函數-explode、htmlspecialchars、nl2br、str_repeat、strlen、substr</a></li>
+            <li><a href="#pagetopic3">日期函數-date、time、date_create、date_diff</a></li>
+            <li><a href="#pagetopic4">數學函數-abs、ceil、floor、max、min、pow、round</a></li>
+            <li><a href="#pagetopic5">轉址函數-header</a></li>
+          </ul>
+        </p>
+
+        <div class="px-3" id="pagetopic1">
+          <h3 class="text-danger">檢查函數-empty、isset</h3>
+          <p>isset函數於檢查變數是否存在，empty函數用於檢查變數是否為空值。</p>
+          <pre><code>
+&lt;?php
+//變數$abs沒有宣告，因此輸出 變數不存在
+if (isset($abc))
+  echo "變數存在";
+else
+  echo "變數不存在";
+$abc="";
+//變數$abs為空值
+if (empty($abc))
+  echo "變數空值";
+else
+  echo "變數不是空值";
+?&gt;
+          </code></pre>
+        </div>
+        <div class="px-3" id="pagetopic2">
+          <h3 class="text-danger">字串函數-explode、htmlspecialchars、nl2br、str_repeat、strlen、substr</h3>
+          <p>函數用於字串處理包含：
+            <ul>
+              <li>
+                explode(分隔字元,字串)：將字串一分隔字元進行分割並傳回字串陣列。
+              </li>
+              <li>
+                htmlspecialchars(字串)：將字串中預設特殊符號如 <span class="text-danger">&lt;、&gt;、"、'、&</span> 轉為HTML編碼。
+              </li>
+              <li>
+                nl2br(字串)：將字串中跳行控制符號<span class="text-danger">\n</span>用HTML跳行標籤<span class="text-danger">&lt;br/&gt;</span>取代。
+              </li>
+              <li>
+                str_repeat(字串,重複次數)：重複字串。
+              </li>
+              <li>
+                strlen(字串)：傳回字串長度。
+              </li>
+              <li>
+                substr(字串,起始值,傳回長度)：傳回子字串，請注意：字串的第一個字起始值為0。
+              </li>
+            </ul>
+          </p>
+        </div>
+        <div class="px-3" id="pagetopic3">
+          <h3 class="text-danger">日期函數-date、time、date_create、date_diff</h3>
+          <p>函數用於字串處理包含：
+            <ul>
+              <li>
+                date("日期格式")：傳回設定格式日期字串，格式：d代表兩位數字日、D代表英文星期、m代表兩位數字月、M代表英文字月、Y代表4位數字年、y代表2位數字年。
+              </li>
+              <li>
+                time("時間格式")：傳回設定格式時間字串，格式：a代表小寫am/pm、A代表大寫AM/PM、h代表兩位數子12小時制、H代表兩位數子24小時制、i代表兩位數分、s代表兩位數秒。
+              </li>
+              <li>
+                date_create("日期時間字串")：傳回日期時間字串日期物件，如果沒有代入值，則傳回現在日期時間物件。
+              </li>
+              <li>
+                date_diff(日期物件1,日期物件2)：傳回兩個日期物件日期間距。
+              </li>
+              
+            </ul>
+          </p>
+        </div>
+        <div class="px-3" id="pagetopic4">
+          <h3 class="text-danger">數學函數-abs、ceil、floor、max、min、pow、round</h3>
+          <p>函數用於字串處理包含：
+            <ul>
+              <li>
+                abs(數字)：傳回數字絕對值。
+              </li>
+              <li>
+                ceil(數字)：傳回小數無條件進位值。
+              </li>
+              <li>
+                floor(數字)：傳回小數無條件捨去值。
+              </li>
+              <li>
+                max(數字陣列)：傳回數字陣列最大值。
+              </li>
+              <li>
+                min(數字陣列)：傳回數字陣列最小值。
+              </li>
+              <li>
+                pow(底數,冪次方)：傳回底數的幾次方值。
+              </li>
+              <li>
+                round(數字,小數位)：傳回到小數位的四捨五入值。
+              </li>
+              
+              
+            </ul>
+          </p>
+        </div>
+        <div class="px-3" id="pagetopic5">
+          <h3 class="text-danger">轉址函數-header</h3>
+          <p>轉址函數header用於進行轉址的動作，轉址命令後需搭配<span class="text-danger">exit()或die()</span>函數。
+            <ul>
+              <li>
+                header("Location:檔案位址")：將執行頁面轉至對應檔案，請注意：轉址後需搭配<span class="text-danger">exit()或die()</span>函數。
+              </li>             
+            </ul>
+          </p>
+          <pre><code>
+&lt;?php
+header("Location:myfile.php");
+exit();
+?&gt;
+          </code></pre>
+        </div>
+
+    
+    </div>
+
+    <!-- bootstrap js -->
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>  
+    
+    <!-- custom js -->
+    <script>
+      var menu_btn = document.querySelector("#menu-btn");
+      var sidebar = document.querySelector("#sidebar");
+      var container = document.querySelector(".my-container");
+      menu_btn.addEventListener("click", () => {
+        sidebar.classList.toggle("active-nav");
+        container.classList.toggle("active-cont");
+      });
+    </script>
+  </body>
+</html>
