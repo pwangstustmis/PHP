@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PHP</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+
+    <!-- Side-Nav -->
+    <div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+      <ul class="nav flex-column text-white w-100">
+        <li class="nav-item" style="background-color: #fff;padding-left:10px;padding-top:10px;border-bottom: rgb(255, 115, 0) 2px solid;font-size: 16pt;">
+          <p style="color:rgb(248, 138, 11);font-weight: 700;">PHP<br/>進階網頁程式設計</p>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a href="index.html" class="nav-link">簡介與軟體安裝</a></span>
+        </li>
+        <li class="nav-item">
+          <div class="nav-link" href="#topic1" class="nav-item" data-bs-toggle="collapse" aria-expanded="false" aria-controls="topic1">
+            <span class="mx-2">PHP-Basics</span>
+            <i class="fas fa-angle-right"></i>
+          </div>
+          <div class="collapse" id="topic1">
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic1.html">PHP基本語法</a></li>
+            </ul>
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="intro-css.html">CSS樣式</a></li>
+            </ul>
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic2.html">前端表單</a></li>
+            </ul>
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic3.html">PHP表單處理-兩個網頁檔</a></li>
+            </ul>
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic4.html">PHP表單處理-一個網頁檔</a></li>
+            </ul>
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic5.html">PHP常用函數</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a href="cookie_session.html" class="nav-link">Cookie/Session</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a href="fileupload.html" class="nav-link">檔案上載</a></span>
+        </li>     
+      </ul>
+    </div>
+
+
+    <!-- Main Wrapper -->
+    <div class="p-2 my-container active-cont">
+      <!-- Breadcrumb -->
+      <div class="bg-light px-5" aria-label="breadcrumb" style="height:40px;position:fixed;width:100%;top:0;">
+        <a class="btn border-0" id="menu-btn" style="position:fixed"><i class="fas fa-bars"></i></a>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">Cookie/Session</li>
+        </ol>
+      </div>
+      <!--End Top Nav -->
+
+      <!-- main page -->
+      <div style="margin-top:50px;" id="pagetop">
+        <h3 class="text-danger p-3">Cookie/Session</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          <ul>
+            <li><a href="#pagetopic1">系統變數- $_COOKIE</a></li>
+            <li><a href="#pagetopic2">系統變數- $_SESSION</a></li>
+          </ul>
+        </p>
+
+        <div class="px-3" id="pagetopic1">
+          <h3 class="text-danger">系統變數- $_COOKIE</h3>
+          <p>
+            cookie為伺服器寫於客戶端的檔案，最大為4K，當使用者送出要求時，cookie值會一併傳送，使用cookie目的是因為HTTP為無狀態，當伺服器想要紀錄一些簡單資訊於客戶端，這些資訊目的是用於識別客戶時，會使用cookie來記錄這些訊息。PHP cookie設定命令如下：<span class="text-danger">setcookie(cookie變數名稱,cookie設定值,cookie效期,伺服器端使用cookie路徑)</span>，效期以現在時間(<span class="text-danger">time()</span>)為基準，並以秒為單位，預設效期為30天(86400*30)，伺服器端使用cookie路徑預設為整個網站(<span class="text-danger">"/"</span>)，如果指定特定伺服器的路徑才能取用cookie時，則<span class="text-danger">伺服器端使用cookie路徑</span>會設定該路徑值。請注意：<span class="text-danger">$_COOKIE</span>變數為一陣列。
+          </p>
+          <pre><code>
+&lt;?php
+//設定cookie變數account
+setcookie("account","abc");
+echo $_COOKIE["account"]; //印出cookie值
+setcookie("account","abc",time()-10); //刪除cookie,因為效期過期
+?&gt;
+          </code></pre>
+          <p class="text-success">
+            練習：請利用cookie儲存使用者拜訪次數，每次拜訪則拜訪次數加1並更新該cookie值。
+          </p>
+          <p class="text-success">
+            練習：包含p1.php與p2.php兩個檔案，網站進入點為p1.php。p1.php包含送出按鈕與一文字方塊用於輸入暱稱，使用cookie並設計如果使用者先前輸過暱稱則直接跳到p2.php，否則要在p1.php等使用者輸入暱稱後跳p2.php。
+          </p>
+        </div>
+        <div class="px-3" id="pagetopic2">
+          <h3 class="text-danger">系統變數- $_SESSION</h3>
+          <p>
+            Session為一暫時性的全域變數，當使用者關閉瀏覽器離開網站時，'這些暫時性變數就會不存在。不同於先前cookie，Session可儲存複雜資料，同時變數存在位置不在客戶端，而是在伺服器端。要使用Session變數，請在PHP檔第一行設定<span class="text-danger">session_start()</span>命令，之後就可以利用<span class="text-danger">$_SESSION</span>系統變數來設定或取得變數值，使用者可以使用<span class="text-danger">session_destroy()</span>命令來刪除所有的Session變數，或使用<span class="text-danger">unset($_SESSION['變數名稱']</span>來刪除特定的Session變數。
+          </p>
+          <pre><code>
+&lt;?php
+session_start(); //如果沒有設定session_start()則無法使用Session變數
+//設定Session變數account
+$_SESSION['account']='abc';
+$_SESSION['password']='1234';
+unset($_SESSION['password']); //刪除$_SESSION['password']
+session_destroy(); //刪除所有Session變數
+?&gt;
+</code></pre>
+          <p class="text-success">
+            練習：包含p1.php與p2.php兩個檔案，網站進入點為p1.php。p1.php包含送出按鈕與一文字方塊用於輸入暱稱，使用Session變數nickname儲存輸入暱稱，當使用者重新進入p1.php而且Session變數nickname存在則直接跳到p2.php，否則要在p1.php等使用者輸入暱稱後跳p2.php。
+          </p>
+          <p class="text-success">
+            練習：請使用Session變數cart儲存使用者點選購物車。p1.php中表單包含5樣商品(名稱、單價、數量、加入購物車按鈕)，使用者可藉由點選增加(+)及減少(-)按鈕來改變數量，點選加入購物車將選擇資料及數量加入購物車。
+          </p>
+        </div>
+        
+
+    
+    </div>
+
+    <!-- bootstrap js -->
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>  
+    
+    <!-- custom js -->
+    <script>
+      var menu_btn = document.querySelector("#menu-btn");
+      var sidebar = document.querySelector("#sidebar");
+      var container = document.querySelector(".my-container");
+      menu_btn.addEventListener("click", () => {
+        sidebar.classList.toggle("active-nav");
+        container.classList.toggle("active-cont");
+      });
+    </script>
+  </body>
+</html>

@@ -62,58 +62,67 @@
       <div class="bg-light px-5" aria-label="breadcrumb" style="height:40px;position:fixed;width:100%;top:0;">
         <a class="btn border-0" id="menu-btn" style="position:fixed"><i class="fas fa-bars"></i></a>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item">PHP表單處理-一個網頁檔</li>
+          <li class="breadcrumb-item">檔案上載</li>
         </ol>
       </div>
       <!--End Top Nav -->
 
       <!-- main page -->
       <div style="margin-top:50px;" id="pagetop">
-        <h3 class="text-danger p-3">內容涵蓋</h3>
+        <h3 class="text-danger p-3">檔案上載</h3>
         <p class="px-3" style="margin-top:-20px;">
           <ul>
-            <li><a href="#pagetopic1">PHP取得表單傳送方式- $_SERVER["REQUEST_METHOD"]</a></li>
+            <li><a href="#pagetopic1">表單設計- 檔案上載</a></li>
+            <li><a href="#pagetopic2">系統變數- $_FILES</a></li>
           </ul>
         </p>
-        <div class="px-3">
-          <p>一個網頁檔表單處理是指<span class="text-danger"> 表單與表單處理檔案為同一個檔案 </span>，因此表單檔案為PHP。由於表單檔案與表單處理檔案為同一個檔案，因此表單 <span class="text-danger">action</span> 設定值為自己，請注意PHP有一系統變數 <span class="text-danger">$_SERVER['PHP_SELF']</span> 會傳回顯在執行檔案的名稱，表單 action 請部要直接設 <span class="text-danger">$_SERVER['PHP_SELF']</span>，因為網頁 <span class="text-danger">XSS</span> 會攻擊這樣設定，使用者可直接設定檔名或使用 <span class="text-danger">action="&lt;?php =htmlentities($_SERVER['PHP_SELF']); ?&gt;"</span>。</p>
-          <p class="text-danger">p1.php</p>
-          <pre><code>
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;meta charset="utf-8"&gt;
-    &lt;link rel="stylesheet" href="css/bootstrap.min.css"&gt;&lt;/link&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-  &lt;?php
-    //使用者送出表單時執行
-    if ($_SERVER["REQUEST_METHOD"]=="POST") {
-        echo "使用者傳送帳號:"._POST["account"].", "."使用者傳送密碼:"._POST["password"];
-    }
-  ?&gt;
-    &lt;form method="post" action="p1.php"&gt;
-      &lt;div class="form-group"&gt;
-        &lt;label for="f1"&gt;帳號&lt;/label&gt;
-        &lt;input type="text" class="form-control" id="f1" name="account"&gt;
-      &lt;/div&gt;
-      &lt;div class="form-group"&gt;
-        &lt;label for="f2"&gt;密碼&lt;/label&gt;
-        &lt;input type="text" class="form-control" id="f2" name="password"&gt;
-      &lt;/div&gt;
-      &lt;button type="submit" class="btn btn-primary" name="btn"&gt;登入&lt;/button&gt;
-    &lt;/form&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-        </code></pre>
-        </div>
 
         <div class="px-3" id="pagetopic1">
-          <h3 class="text-danger">PHP取得表單傳送方式- $_SERVER["REQUEST_METHOD"]</h3>
-          <p>使用者點選表單傳送後，表單傳送方法 <span class="danger">get或post</span> 會設定於PHP系統變數 <span class="danger">$_SERVER["REQUEST_METHOD"]</span> 中，請注意：系統變數都必須是大寫，系統變數中值也是大寫，如果表單傳送方法為 <span class="danger">get</span>，系統變數 <span class="danger">$_SERVER["REQUEST_METHOD"]</span> 值為  <span class="danger">GET</span>，如果表單傳送方法為 <span class="danger">post</span>，系統變數 <span class="danger">$_SERVER["REQUEST_METHOD"]</span> 值為  <span class="danger">POST</span>，如果使用者沒有傳送表單，則<span class="danger">$_SERVER["REQUEST_METHOD"]</span> 預設值為<span class="danger">GET</span>。
+          <h3 class="text-danger">表單設計- 檔案上載</h3>
+          <p>
+            使用PHP進行檔案上載，請先確定PHP組態檔<span class="text-danger">php.ini</span>中<span class="text-danger">file_uploads、upload_tmp_dir、upload_max_filesize、max_file_uploads</span>是否設定。同時上載檔案表單方法必須是<span class="text-danger">post</span>，而且表單編碼類型必須設為<span class="text-danger">enctype="multipart/form-data"</span>。表單欄位則使用<span class="text-danger">&lt;input type="file"&gt;</span>，表單欄位記得設定<span class="text-danger">name</span>屬性。以下JavaScript在本地端顯示圖片。
           </p>
-          <p class="text-success">練習：請用一個表單及POST方法傳送帳號密碼，預設帳號 abcde，密碼 12345，如果帳號或密碼錯誤，請在按鈕下方顯示錯誤訊息「帳號或密碼錯誤」。</p>
-          <p class="text-success">練習：請用一個表單及GET方法傳送帳號密碼，預設帳號 abcde，密碼 12345，如果帳號或密碼錯誤，請在按鈕下方顯示錯誤訊息「帳號或密碼錯誤」。(請注意：檔案預設為GET傳輸模式，如何判斷使用者是否傳送表單？提示：可以使用 isset 函數)</p>     
-    </div>
+          <pre><code>
+&lt;input type="file" onchange="previewFile(event)"&gt;&lt;br/&gt;
+&lt;img src="" height="200" alt="圖片預覽..." id="myimg"&gt;
+&lt;script
+function previewFile(event) {
+    var selectedFile = event.target.files[0];
+    var reader = new FileReader(); 
+    var imgtag = document.getElementById("myimg");
+  
+    reader.onload = function(event) {
+      imgtag.src = event.target.result;
+    };
+  
+    reader.readAsDataURL(selectedFile);
+  }
+/script&gt;
+          </code></pre>
+          <p class="text-success">
+            練習：請設計檔案上載標單並在本地端預覽圖片。
+          </p>
+        </div>
+        <div class="px-3" id="pagetopic2">
+          <h3 class="text-danger">系統變數- $_FILES</h3>
+          <p>
+            系統變數$_FILES為一多維陣列，$_FILES['上載欄位名稱']包含陣列<span class="text-danger">tmp_name、name、size、type、error</span>等值，<span class="text-danger">tmp_name</span>為檔案在暫存區名稱，<span class="text-danger">name</span>為原始檔案名稱，<span class="text-danger">size</span>為檔案大小，<span class="text-danger">type</span>為上載檔案類型，<span class="text-danger">size</span>為檔案大小，<span class="text-danger">error</span>為上載時錯誤代碼包含成功與失敗。
+          </p>
+          <p>
+            要將檔案從後端暫存區移至特定區域步驟如下：使用<span class="text-danger">basename('檔名')</span>取得檔案名稱後，利用<span class="text-danger">move_uploaded_file(暫存區位置檔案，目的檔案)</span>將檔案從暫存區搬至特定位置。請注意：<span class="text-danger">move_uploaded_file(暫存區位置檔案，目的檔案)</span>傳回true/false帶咬動作成功與否。
+          </p>
+          <pre><code>
+&lt;?php
+$tmp_name=$_FILES['file']['tmp_name'];
+$fname=basename($_FILES['file']['name'])
+move_uploaded_file($tmp_name,'c:/upload/'.$fname);
+?&gt;
+</code></pre>
+          <p class="text-success">
+            練習：請上載圖片至C磁碟機檔案夾upload中
+          </p>
+        </div>
+        
 
     
     </div>
