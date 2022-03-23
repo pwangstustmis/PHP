@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PHP</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+
+    <!-- Side-Nav -->
+    <div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+      <ul class="nav flex-column text-white w-100">
+        <li class="nav-item" style="background-color: #fff;padding-left:10px;padding-top:10px;border-bottom: rgb(255, 115, 0) 2px solid;font-size: 16pt;">
+          <p style="color:rgb(248, 138, 11);font-weight: 700;">PHP<br/>進階網頁程式設計</p>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a href="index.html" class="nav-link">簡介與軟體安裝</a></span>
+        </li>
+        <li class="nav-item">
+          <div class="nav-link" href="#topic1" class="nav-item" data-bs-toggle="collapse" aria-expanded="false" aria-controls="topic1">
+            <span class="mx-2">PHP-Basics</span>
+            <i class="fas fa-angle-right"></i>
+          </div>
+          <div class="collapse" id="topic1">
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic1.html">PHP基本語法</a></li>
+            </ul>
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="intro-css.html">CSS樣式</a></li>
+            </ul>
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic2.html">前端表單</a></li>
+            </ul>
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic3.html">PHP表單處理-兩個網頁檔</a></li>
+            </ul>
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic4.html">PHP表單處理-一個網頁檔</a></li>
+            </ul>
+            <ul>
+              <li class="menuitem"><a class="nav-link" href="php-basic5.html">PHP常用函數</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a href="cookie_session.html" class="nav-link">Cookie/Session</a></span>
+        </li>
+        <li class="mx-2">
+          <span class="menuitem"><a href="fileupload.html" class="nav-link">檔案上載</a></span>
+        </li>
+        <li class="mx-2">
+            <span class="menuitem"><a href="pdomysql.html" class="nav-link">資料庫- PHP資料物件, PDO</a></span>
+          </li>    
+      </ul>
+    </div>
+
+
+    <!-- Main Wrapper -->
+    <div class="p-2 my-container active-cont">
+      <!-- Breadcrumb -->
+      <div class="bg-light px-5" aria-label="breadcrumb" style="height:40px;position:fixed;width:100%;top:0;">
+        <a class="btn border-0" id="menu-btn" style="position:fixed"><i class="fas fa-bars"></i></a>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">資料庫- PHP資料物件, PDO</li>
+        </ol>
+      </div>
+      <!--End Top Nav -->
+
+      <!-- main page -->
+      <div style="margin-top:50px;" id="pagetop">
+        <h3 class="text-danger p-3">資料庫- PHP資料物件, PDO</h3>
+        <p class="px-3" style="margin-top:-20px;">
+          <ul>
+            <li><a href="#pagetopic1">PDO 資料庫連接</a></li>
+            <li><a href="#pagetopic2">PDO MySQL- 資料CRUD(Create、Read、Update、Delete)</a></li>
+          </ul>
+        </p>
+        <p class="px-3">
+          使用資料庫之前，請記得<span class="text-danger">啟動XAMPP控制台中MySQL選項</span>。點選<span class="text-danger">Admin</span>使用PHPMyAdmin管理MySQL資料庫。
+        </p>
+        <div class="px-3" id="pagetopic1">
+          <h3 class="text-danger">PDO 資料庫連接</h3>
+          <p>
+            PDO提供單一介面讓PHP程式來存取不同類型資料庫。使用資料庫之前，必須先建立資料庫連接，XAMPP MySQL預設帳號為<span class="text-danger">root</span>，沒有密碼。<span class="text-danger">PDO("mysql:host=資料庫伺服器位置;dbname=資料庫名稱","使用者帳號","使用者密碼")</span>會傳回對應資料庫的連接物件，使用者可使用下列程式建立資料庫連接物件：
+          </p>
+          <pre><code>
+try {
+    $pdo=new PDO("mysql:host=localhost;dbname=資料庫名稱;","root","");
+} catch (PDOException $err) {
+    die("資料庫無法連接");
+}
+          </code></pre>
+          <p class="text-success">
+            練習：請使用PHPMyAdmin在MySQL建立<span class="text-danger">iChef</span>資料庫，並建立<span class="text-danger">iusers</span>資料表包含<span class="text-danger">id、account、password、nickname、email、image</span>等欄位，並手動輸入一筆資料。
+          </p>
+          <p class="text-success">
+            練習：請使用PDO連接iChef資料庫。
+          </p>
+        </div>
+        <div class="px-3" id="pagetopic2">
+          <h3 class="text-danger">PDO MySQL- 資料CRUD(Create、Read、Update、Delete)</h3>
+          <p>
+            PDO藉由<span class="text-danger">prepare、execute</span>命令來執行SQL語法。如果執行命令有代入參數，使用者可以在<span class="text-danger">prepare</span>命令中使用<span class="text-danger">?</span>代表執行時的代入參數，並在<span class="text-danger">execute</span>命令將參數以陣列方式代入。PDO <span class="text-danger">prepare</span>會傳回命令物件，該命令物件將用於<span class="text-danger">excute</span>(執行)SQL命令，並藉由物件<span class="text-danger">fetch()、fetchAll()</span>傳回單筆或所有資料，執行<span class="text-danger">fetch()、fetchAll()</span>時，可代入PDO::FETCH_NUM或PDO::FETCH_ASSOC，分別代表傳回答案陣列以<span class="text-danger">數字或欄位名稱</span>來對應陣列結果。
+          </p>
+          <p>
+            下列兩個select命令分別執行明細與群組，第一個命令包含下列關鍵字：
+            <ul>
+              <li>
+                <span class="text-danger">distinct</span>：用於設定選取唯一值。
+              </li>
+              <li>
+                <span class="text-danger">as</span>：設定新欄位名稱。
+              </li>
+              <li>
+                <span class="text-danger">inner join</span>：設定關聯，最常用為inner join，資料表會留下連接欄位值相同的紀錄，另外還有left join與right join。
+              </li>
+              <li>
+                <span class="text-danger">where</span>：用於設定選取條件，當條件超過一個以上，並須使用<span class="text-danger">and、or</span>進行串接。
+              </li>
+              <li>
+                <span class="text-danger">order by</span>：用於設定選取排序，預設為遞增排序，可以設定關鍵字<span class="text-danger">desc</span>來進行遞減排序。
+              </li>
+              <li>
+                <span class="text-danger">limit</span>：用於設定選取資料表資料筆數，如果使用方式為<span class="text-danger">limit 資料筆數</span> 代表選取開始幾筆的資料筆數，如果設定<span class="text-danger">limit 開始記錄位置,資料筆數</span> 代表選取從特定紀錄位置開始的資料筆數。
+              </li>
+              <li>
+                <span class="text-danger">group by</span>：用於設定資料群組，<span class="text-danger">having</span>用於設定群組欄位條件。
+              </li>
+            </ul>
+          </p>
+          <pre><code>
+select distinct 欄位 as 新欄位名稱 from 資料表1 inner join 資料表2 on 資料表1.欄位1=資料表2.欄位1
+and 資料表1.欄位2=資料表2.欄位2 where 條件1 and 條件2 order by 欄位1 desc limit 資料筆數
+
+select count(欄位) as 新欄位名稱 group by 欄位 having 條件
+--------------------------------------------------------
+$stmt=$pdo->prepare('select * from iusers');
+$stmt->execute();
+$rows=$stmt->fetchAll();
+          </code></pre>
+          <p>
+            常用函數包含<span class="text-danger">sum、avg、count、min、max、is null</span>等。
+          </p>
+          <p>
+            insert命令執行資料新增，第一個命令代表新增值至對應欄位，如果要使用參數進行新增時，PDO prepare新增命令使用<span class="text-danger">?</span>代表代入參數，而PDO execute命令則使用<span class="text-danger">execute(array(代入值1,代入值2))</span>方式代入參數。            
+          </p>
+<pre><code>
+insert into 資料表(欄位1,欄位2) values(值1,值2)
+
+insert into 資料表(欄位1,欄位2) values(?,?)
+----------------------------------------------
+$stmt=$pdo->prepare('insert into iusers(account,password,nickname,email,image) values(?,?,?,?,?)');
+$stmt->execute(array('a','123','nice','a@stust.edu.tw','a.jpg'));
+          </code></pre>
+          <p>
+            update命令執行資料更新，第一個命令代表更新值至對應欄位，如果要使用參數進行新增時，PDO prepare更新命令使用<span class="text-danger">?</span>代表代入參數，而PDO execute命令則使用<span class="text-danger">execute(array(代入值1,代入值2))</span>方式代入參數。            
+          </p>
+<pre><code>
+update 資料表 set 欄位1=值1,欄位2=值2 where 條件
+
+update 資料表 set 欄位1=?,欄位2=? where 條件
+----------------------------------------------
+$stmt=$pdo->prepare('update iusers set email="b@gmail.com"'); //請思考命令執行後有何問題
+$stmt->execute();
+          </code></pre>
+          <p>
+            delete命令執行資料刪除，第一個命令代表更新值至對應欄位，如果要使用參數進行新增時，PDO prepare更新命令使用<span class="text-danger">?</span>代表代入參數，而PDO execute命令則使用<span class="text-danger">execute(array(代入值1,代入值2))</span>方式代入參數。            
+          </p>
+          <pre><code>
+delete from 資料表 where 條件
+          </code></pre>
+          <p>
+            練習：請使用PDO連接iChef資料庫，並修改flipclass中login檔案來執行登入與註冊功能。(練習多頁與單頁處理)
+          </p>
+        </div>
+        
+
+    
+    </div>
+
+    <!-- bootstrap js -->
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>  
+    
+    <!-- custom js -->
+    <script>
+      var menu_btn = document.querySelector("#menu-btn");
+      var sidebar = document.querySelector("#sidebar");
+      var container = document.querySelector(".my-container");
+      menu_btn.addEventListener("click", () => {
+        sidebar.classList.toggle("active-nav");
+        container.classList.toggle("active-cont");
+      });
+    </script>
+  </body>
+</html>
