@@ -27,7 +27,7 @@
           </div>
           <div class="collapse" id="topic1">
             <ul>
-              <li class="menuitem"><a class="nav-link" href="php-basic1.html">PHP基本語法</a></li>
+              <li class="menuitem"><a class="nav-link" href="php-basic1.html">HTML/PHP基本語法</a></li>
             </ul>
             <ul>
               <li class="menuitem"><a class="nav-link" href="intro-css.html">CSS樣式</a></li>
@@ -176,8 +176,70 @@ $stmt->execute();
           <pre><code>
 delete from 資料表 where 條件
           </code></pre>
-          <p>
-            練習：請使用PDO連接iChef資料庫，並修改flipclass中login檔案來執行登入與註冊功能。(練習多頁與單頁處理)
+          <p class="text-success">
+            練習：請建立資料庫<span class="text-danger">stust</span>，並建立<span class="text-danger">students</span>資料表包含<span class="text-danger">id(編號)、sid(學號)、name(姓名)、dept(系所)</span>。請使用students執行資料庫CRUD動作，請注意：動作執行可在多頁或單頁完成。
+          </p>
+          <p class="text-success">
+            練習：請建立資料庫<span class="text-danger">stust</span>，並建立<span class="text-danger">news</span>資料表包含<span class="text-danger">id(編號)、title(標題)、sdate(起始日)、edate(截止日)、pdivision(發布單位)、ptype(公告類型)、pcontent(內容)</span>。發布單位包含<span class="text-danger">教務處、學務處、資訊管理系</span>，公告類型包含<span class="text-danger">全部、行政、學術、活動、工讀</span>。請使用下列表單進行資料新增動作。
+          </p>
+          <pre><code>
+&lt;div style="width:60%;margin:0 auto;"&gt;
+  &lt;form&gt;
+    &lt;div class="form-group m-3"&gt;
+      &lt;h3 class="text-success"&gt;標題&lt;/h3&gt;
+      &lt;input type="text" class="form-control" placeholder="請輸入標題"&gt;
+    &lt;/div&gt;
+    &lt;div class="row m-3"&gt;
+      &lt;div class="col"&gt;
+        &lt;div class="form-group"&gt;
+          &lt;h3 class="text-success"&gt;起始日期&lt;/h3&gt;
+          &lt;input type="date" class="form-control" placeholder="選取起始日期"&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="col"&gt;
+        &lt;div class="form-group"&gt;
+          &lt;h3 class="text-success"&gt;結束日期&lt;/h3&gt;
+          &lt;input type="date" class="form-control" placeholder="選取結束日期"&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="col"&gt;
+        &lt;div class="form-group"&gt;
+          &lt;h3 class="text-success"&gt;發布單位&lt;/h3&gt;
+          &lt;select id="pdivision"&gt;
+            &lt;option value="教務處">教務處&lt;/option&gt;
+            &lt;option value="學務處">學務處&lt;/option&gt;
+            &lt;option value="資訊管理系">資訊管理系&lt;/option&gt;
+          &lt;/select&gt;                     
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="col"&gt;
+        &lt;div class="form-group"&gt;
+          &lt;h3 class="text-success"&gt;發布類型&lt;/h3&gt;
+          &lt;select id="ptype"&gt;
+            &lt;option value="全部"&gt;全部&lt;/option&gt;
+            &lt;option value="行政"&gt;行政&lt;/option&gt;
+            &lt;option value="學術"&gt;學術&lt;/option&gt;
+            &lt;option value="活動"&gt;活動&lt;/option&gt;
+            &lt;option value="工讀"&gt;工讀&lt;/option&gt;
+          &lt;/select&gt;                       
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group m-3"&gt;
+      &lt;h3 class="text-success"&gt;公告內容&lt;/h3&gt;
+      &lt;textarea cols="100" rows="10"&gt;&lt;/textarea&gt;
+    &lt;/div&gt;
+    &lt;div class="text-end"&gt;
+      &lt;button type="submit" class="btn btn-danger"&gt;新增&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+&lt;/div&gt;
+          </code></pre>
+          <p class="text-success">
+            練習：請利用資料庫<span class="text-danger">stust</span>及資料表<span class="text-danger">news</span>，在資料新增後，請利用下拉式方塊選擇<span class="text-danger">發布單位</span>顯示所有最新消息。<span class="text-danger">請注意：剛開始顯示訊息標題，點選標題後，跳頁顯示該消息內容</span>
+          </p>
+          <p class="text-success">
+            練習：請利用資料庫<span class="text-danger">stust</span>及資料表<span class="text-danger">news</span>，在資料新增後，請利用下拉式方塊選擇<span class="text-danger">發布單位</span>顯示所有最新消息並加上修改按鈕。<span class="text-danger">請注意：顯示訊息標題，點選修改按鈕，跳頁更新該消息</span>
           </p>
         </div>
         
