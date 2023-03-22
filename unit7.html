@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>PHP表單處理-兩個網頁表單處理</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="scripts/myscript.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="sidenav">
+            <div class="unititem">
+                <div><a href="#slide-1" class="itembutton" onclick="nextSlide(1);">1</a></div>
+                <div>表單檔案設計</div>                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-2" class="itembutton" onclick="nextSlide(2);">2</a></div>
+                <div>表單處理設計</div>                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-3" class="itembutton" onclick="nextSlide(3);">3</a></div>
+                <div>表單控制項陣列設定與處理</div>                                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-4" class="itembutton" onclick="nextSlide(4);">4</a></div>
+                <div>表單欄位欄位空值檢查</div>                                                              
+            </div>
+
+        </div>
+        <div class="main">
+            <div class="slides">
+                <!--單元內容-->
+                <div class="slide" id="slide-1">
+                    <div class="unittitle">表單檔案設計</div>
+                    <p>兩個網頁檔表單處理由一個表單檔案呼叫另一個表單處理PHP檔案，表單檔案可以是<em>HTML</em>或<em>PHP</em>檔，當表單檔案須執行PHP命令則須設為PHP檔，表單檔案設計需注意下列事項：</p>
+                    <em>
+                        <ul>
+                            <li>
+                                表單控制項須包含於 HTML form 標籤中。
+                            </li>
+                            <li>
+                                form標籤屬性須設定表單傳送方法(method)，常用方法包含：GET 與 POST，使用GET 方法，表單資料會以 xxx.php?欄位name值1=值1&欄位name值2=值2 方式傳送表單資料，使用POST 方法，表單資料會包含於 HTTP Request內容內傳送。
+                            </li>
+                            <li>
+                                form標籤屬性須設定表單傳送資料處理程式(action)，如果未設定或設為空值，表單資料會傳送回表單檔案本身。
+                            </li>
+                            <li>
+                                表單使用 POST 方法傳送表單時，form標籤屬性 enctype 用於設定傳送資料編碼方式，enctype預設值為 application/x-www-form-urlencoded ，傳送資料以 url 編碼方式進行編碼，如使用檔案上載控制項，請將 enctype 設定為 multipart/form-data。
+                            </li>
+                            <li>
+                                表單控制項必須包含 name 屬性，讓表單處理程式取得對應控制項。
+                            </li>
+                        </ul>
+                    </em>                    
+                    <p class="codeblock">
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;!-- 設定utf-8編碼 --&gt;
+        &lt;meta charset="utf-8"&gt;       
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;form method="post" action="p2.php"&gt;
+            &lt;div class="form-group"&gt;
+                &lt;label for="f1">帳號&lt;/label&gt;
+                &lt;input type="text" class="form-control" id="f1" name="account"&gt;
+            &lt;/div&gt;
+            &lt;div class="form-group"&gt;
+                &lt;label for="f2">密碼&lt;/label&gt;
+                &lt;input type="text" class="form-control" id="f2" name="password"&gt;
+            &lt;/div&gt;
+            &lt;button type="submit" class="btn btn-primary" name="btn"&gt;登入&lt;/button&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                    </p>
+                </div>
+                <div class="slide" id="slide-2">
+                    <div class="unittitle">表單處理設計</div>
+                    <p>表單處理程式用於接收、處理表單傳送資料，處理傳送資料方式取決於表單傳送屬性<em>method</em>設定，如果<em>method</em>設為<em> get</em>，則為<em>GET表單</em>，GET表單資料會利用網址列的方式<em> xxx.php?欄位name值1=值1&欄位name值2=值2 </em>傳送表單資料，而傳送表單控制項資料會以陣列方式儲存於PHP<em> $_GET </em>的系統變數，使用者可以在PHP處理程式使用<em> $_GET["表單欄位name值"] </em>來取得使用者傳送欄位值，請注意<em>$_GET</em>為系統變數，一定要大寫。</p>
+                    <p>如果<em>method</em>設為<em> post</em>，則為<em>POST表單</em>，POST表單會經由HTTP request本體傳送表單資料至處理程式，傳送資料會以陣列方式儲存於PHP<em> $_POST </em>的系統變數，使用者可以在PHP處理程式使用<em> $_POST["表單欄位name值"] </em>來取得使用者傳送欄位值，請注意<em>$_POST</em>為系統變數，一定要大寫。</p>
+                    <p>
+                        下列程式使用表單程式(p1.html)以POST方式呼叫處理檔案(p2.php)
+                    </p>                   
+                    <p class="codeblock">
+&lt;!--表單檔案p1.html--&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;!-- 設定utf-8編碼 --&gt;
+        &lt;meta charset="utf-8"&gt;       
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;form method="post" action="p2.php"&gt;
+            &lt;div class="form-group"&gt;
+                &lt;label for="f1">帳號&lt;/label&gt;
+                &lt;input type="text" class="form-control" id="f1" name="account"&gt;
+            &lt;/div&gt;
+            &lt;div class="form-group"&gt;
+                &lt;label for="f2">密碼&lt;/label&gt;
+                &lt;input type="text" class="form-control" id="f2" name="password"&gt;
+            &lt;/div&gt;
+            &lt;button type="submit" class="btn btn-primary" name="btn"&gt;登入&lt;/button&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                    </p>
+                    <p class="codeblock">
+//表單處理程式p2.php
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;!-- 設定utf-8編碼 --&gt;
+        &lt;meta charset="utf-8"&gt;       
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;?php
+            echo "傳送帳號:".$_POST["account"]."&lt;p&gt;";
+            echo "傳送密碼:".$_POST["password"]."&lt;p&gt;";
+        ?&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                    </p>
+                </div>
+                <div class="slide" id="slide-3">
+                    <div class="unittitle">表單控制項陣列設定與處理</div>
+                    <p>表單控制項大多為獨立單一欄位，就是不同控制項<em>name屬性</em>為不同變數名稱，如果希望將表單相關控制項群組成一組後傳送至後端PHP，則表單相關群組控制項欄位<em> name </em>屬性必須設定為相同變數名稱加上方括號如<em> name="欄位變數名稱[]"</em>，藉由將相同變數名稱加上方括號設定 <em>name="欄位變數名稱[]" </em>，控制項會以陣列方式傳給PHP處理程式。</p>
+                    <p>下列程式範例以陣列方式傳送興趣核取方塊，興趣為多選，透過陣列方式來傳遞興趣欄位可簡化變數的設定，請注意：PHP處理程式中可使用PHP函數<em> count($陣列變數)</em> 取得陣列變數大小，PHP陣列起始位置為<em> 0</em>。</p>
+                    <p class="codeblock">
+    &lt;!--表單檔案p1.html--&gt;
+    &lt;html&gt;
+        &lt;head&gt;
+            &lt;!-- 設定utf-8編碼 --&gt;
+            &lt;meta charset="utf-8"&gt;       
+        &lt;/head&gt;
+        &lt;body&gt;
+            &lt;form method="post" action="p2.php"&gt;
+                &lt;div class="form-check form-check-inline"&gt;
+                    &lt;input class="form-check-input" type="checkbox" id="chk1" value="逛街" name="hobbies[]"&gt;
+                    &lt;label class="form-check-label" for="chk1"&gt;逛街&lt;/label&gt;
+                &lt;/div&gt;
+                &lt;div class="form-check form-check-inline"&gt;
+                    &lt;input class="form-check-input" type="checkbox" id="chk2" value="看電影" name="hobbies[]"&gt;
+                    &lt;label class="form-check-label" for="chk2"&gt;看電影&lt;/label&gt;
+                &lt;/div&gt;
+                &lt;div class="form-check form-check-inline"&gt;
+                    &lt;input class="form-check-input" type="checkbox" id="chk3" value="美食" name="hobbies[]"&gt;
+                    &lt;label class="form-check-label" for="chk3"&gt;美食&lt;/label&gt;
+                &lt;/div&gt;
+                &lt;button type="submit" class="btn btn-primary" name="btn"&gt;登入&lt;/button&gt;
+            &lt;/form&gt;
+        &lt;/body&gt;
+    &lt;/html&gt;
+                    </p>
+                    <p class="codeblock">
+//表單處理程式p2.php使用foreach取得$_POST["hobbies"]陣列資料
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;!-- 設定utf-8編碼 --&gt;
+        &lt;meta charset="utf-8"&gt;       
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;?php
+            $hobbies=$_POST["hobbies"];
+            echo "興趣個數:".count($hobbies)."&lt;p&gt;";
+            foreach ($hobbies as $h)
+                echo "興趣:".$h."&lt;p&gt;";
+        ?&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                    </p>
+                </div>
+                <div class="slide" id="slide-4">
+                    <div class="unittitle">表單欄位欄位空值檢查</div>
+                    <p>表單欄位檢查可執行於前端或後端，本單元簡述利用PHP命令<em>empty、isset</em>來執行後端表單檢查。</p>
+                    <p>
+                        PHP<em> empty </em>函數用於檢查<em>變數是否存在 或 變數存在但是否為空值</em>，當變數不存在，<em>empty</em>函數會傳回<em>true</em>，當變數存在而且值為空值時，<em>empty</em>函數會傳回<em>true</em>，空值可能為<em>""、0、0.0、"0"、NULL、false、空陣列</em>。
+                    </p>
+                    <p>
+                        PHP<em> isset </em>函數用於檢查<em>變數存在並且不為NULL</em>，變數不存在，<em>isset</em>函數會傳回<em>false</em>。當變數存在而且值為NULL時，<em>isset</em>函數會傳回<em>false</em>。
+                    </p>
+                    <div class="unittitle">練習</div>
+                    <div class="codeblock">
+    1. 請使用 empty 函數測試 變數不存在、變數存在但是值為空值、變數存在但是值不為空值。
+    2. 請使用 isset 函數測試 變數不存在、變數存在但是值為空值、變數存在但是值不為空值。
+                    </div>
+                </div>
+                
+
+                <div class="backbtn">
+                    <a href="index.html" type="button" class="btn btn-primary btn-lg">返回單元</a>
+                </div>
+                
+                
+            </div>
+        </div>      
+    </div>
+    
+</body>
+
+</html>

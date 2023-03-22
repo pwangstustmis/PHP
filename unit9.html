@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>PHP表單處理-兩個網頁表單處理</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="scripts/myscript.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="sidenav">
+            <div class="unititem">
+                <div><a href="#slide-1" class="itembutton" onclick="nextSlide(1);">1</a></div>
+                <div>資料庫管理-PHPMyAdmin</div>                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-2" class="itembutton" onclick="nextSlide(2);">2</a></div>
+                <div>資料庫連接</div>                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-3" class="itembutton" onclick="nextSlide(3);">3</a></div>
+                <div>資料庫操作-選取(select)</div>                                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-4" class="itembutton" onclick="nextSlide(4);">4</a></div>
+                <div>資料庫操作-新增(insert)</div>                                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-5" class="itembutton" onclick="nextSlide(5);">5</a></div>
+                <div>資料庫操作-修改(update)</div>                                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-6" class="itembutton" onclick="nextSlide(6);">6</a></div>
+                <div>資料庫操作-刪除(delete)</div>                                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-7" class="itembutton" onclick="nextSlide(7);">7</a></div>
+                <div>資料庫操作-關聯(join)</div>                                                              
+            </div>
+
+        </div>
+        <div class="main">
+            <div class="slides">
+                <!--單元內容-->
+                <div class="slide" id="slide-1">
+                    <div class="unittitle">資料庫管理-PHPMyAdmin</div>
+                    <p>開啟XAMPP控制台並點選MySQL選項<em>Start</em>開啟資料庫服務後，。點選<em>Admin</em>開啟<em>PHPMyAdmin</em>管理MySQL資料庫。</p>
+                    <div class="unittitle">練習</div>
+                    <div class="codeblock">
+    1. 請使用PHPMyAdmin建立資料庫名稱為stust
+    2. 在資料庫中請建立兩個資料表
+        1. students資料表：資料表欄位包含 id(紀錄編號)、sid(學號)、sname(姓名)、密碼(password)
+        2. courses資料表：資料表欄位包含 id(紀錄編號)、cname(課程名稱)、credits(學分數)
+        3. ctaken資料表：資料表欄位包含 id(紀錄編號)、sid(學號)、cid(課程編號)
+    3. 請手動在上述3資料表新增資料
+    4. 請使用PHPMyAdmin中SQL練習選取全部學生、特定學生、全部課程、特定課程、每位學生修課內容、特定學生修課內容
+                    </div>
+                </div>
+                <div class="slide" id="slide-2">
+                    <div class="unittitle">資料庫連接</div>
+                    <p><em>PDO</em>提供單一介面讓PHP程式來存取不同類型資料庫。使用PHP存取資料庫之前，必須先建立資料庫連接，XAMPP MySQL預設帳號為<em>root</em>，沒有密碼。使用者可以使用PHP命令<em> PDO("mysql:host=資料庫伺服器位置;dbname=資料庫名稱","使用者帳號","使用者密碼") </em>連接資料庫，執行命令傳回對應資料庫的連接物件，使用者可使用下列程式建立資料庫連接物件。以PHPMyAdmin練習stust資料庫為例，下列程式<em>資料庫名稱</em>會設為<em>stust</em>，如資料庫連接失敗，程式會執行<em>die()</em>命令，停止程式執行並顯示訊息<em>資料庫無法連接</em>。</p>                  
+                    <p class="codeblock">
+    &lt;?php
+        try {
+            $pdo=new PDO("mysql:host=localhost;dbname=資料庫名稱;","root","");
+        } catch (PDOException $err) {
+            die("資料庫無法連接");
+        }
+    ?&gt;
+                    </p>
+                </div>
+                <div class="slide" id="slide-3">
+                    <div class="unittitle">資料庫操作-選取(select)</div>
+                    <p>PDO藉由 <em>prepare、execute</em> 命令來執行SQL語法。如果執行命令有<em>代入參數</em>，使用者可以在<em>prepare</em>命令中使用 <em>?</em>代表執行時的代入參數，並在 <em>execute</em>命令將參數以<em>陣列方式</em>代入。PDO<em> prepare</em>會傳回命令物件，該命令物件將用於<em>excute(執行)</em>SQL命令。</p>
+                    <p>執行選取(select)時，可藉由命令物件<em>fetch()、fetchAll()</em>傳回單筆或所有資料，執行<em>fetch()、fetchAll()</em>時，可代入<em>PDO::FETCH_NUM、PDO::FETCH_ASSOC</em>，分別代表傳回答案陣列以數字或欄位名稱來對應陣列結果。</p>
+                    <p>下列程式範例以陣列方式傳送興趣核取方塊，興趣為多選，透過陣列方式來傳遞興趣欄位可簡化變數的設定，請注意：PHP處理程式中可使用PHP函數<em> count($陣列變數)</em> 取得陣列變數大小，PHP陣列起始位置為<em> 0</em>。</p>
+                    <p>
+                        select命令關鍵字說明如下：
+                        <ul>
+                            <li>
+                                <em>distinct</em>：用於設定選取唯一值。
+                            </li>
+                            <li>
+                                <em>as</em>：設定新欄位名稱。
+                            </li>
+                            <li>
+                                <em>inner join</em>：最常用關聯設定，用於串聯連接欄位相同的紀錄，另外常用關聯如 left join、right join等。
+                            </li>
+                            <li>
+                                <em>where</em>：用於設定選取條件，當條件超過一個以上，並須使用<em>and、or</em>進行串接。
+                            </li>
+                            <li>
+                                <em>order by</em>：用於設定選取排序，預設為遞增排序，可以設定關鍵字<em>desc</em>來進行遞減排序。
+                            </li>
+                            <li>
+                                <em>limit</em>：用於設定選取資料表資料筆數，<em>limit 數字</em> 代表選取最開始<em>數字</em>筆數資料，如果設定<em>limit 開始記錄位置,數字</em> 代表選取從特定紀錄位置開始的<em>數字</em>筆數資料。
+                            </li>
+                            <li>
+                                <em>group by</em>：用於設定資料群組，having用於設定群組欄位條件。常用函數包含<em>sum、avg、count、min、max、is null</em>等。
+                            </li>
+                        </ul>
+                    </p>
+                    <p>下列程式區塊顯示上述命令使用與件簡單PHP選取命令，利用<em>prepare</em>設定選取資料表<em>iusers</em>所有紀錄，之後執行命令物件<em>$stmt</em>並透過<em>fetchAll()</em>方法傳回所有資料至陣列變數<em>$rows</em>。</p>
+                    <p class="codeblock">
+    select distinct 欄位 as 新欄位名稱 from 資料表1 inner join 資料表2 on 資料表1.欄位1=資料表2.欄位1 and 資料表1.欄位2=資料表2.欄位2 where 條件1 and 條件2 order by 欄位1 desc limit 資料筆數
+
+    select count(欄位) as 新欄位名稱 group by 欄位 having 條件
+    --------------------------------------------------------
+    $stmt=$pdo-&gt;prepare('select * from iusers');
+    $stmt->execute();
+    $rows=$stmt->fetchAll();
+                    </p>
+                    <div class="unittitle">練習</div>
+                    <p>所有練習請在<em>PHPMyAdmin</em>中確定命令執行正確後再以PHP執行。</p>
+                    <p class="codeblock">
+    1. 
+                    </p>
+                </div>
+                <div class="slide" id="slide-4">
+                    <div class="unittitle">資料庫操作-新增(insert)</div>
+                    <p>表單欄位檢查可執行於前端或後端，本單元簡述利用PHP命令<em>empty、isset</em>來執行後端表單檢查。</p>
+                    <p>
+                        PHP<em> empty </em>函數用於檢查<em>變數是否存在 或 變數存在但是否為空值</em>，當變數不存在，<em>empty</em>函數會傳回<em>true</em>，當變數存在而且值為空值時，<em>empty</em>函數會傳回<em>true</em>，空值可能為<em>""、0、0.0、"0"、NULL、false、空陣列</em>。
+                    </p>
+                    <p>
+                        PHP<em> isset </em>函數用於檢查<em>變數存在並且不為NULL</em>，變數不存在，<em>isset</em>函數會傳回<em>false</em>。當變數存在而且值為NULL時，<em>isset</em>函數會傳回<em>false</em>。
+                    </p>
+                    <div class="unittitle">練習</div>
+                    <div class="codeblock">
+    1. 請使用 empty 函數測試 變數不存在、變數存在但是值為空值、變數存在但是值不為空值。
+    2. 請使用 isset 函數測試 變數不存在、變數存在但是值為空值、變數存在但是值不為空值。
+                    </div>
+                </div>
+                
+
+                <div class="backbtn">
+                    <a href="index.html" type="button" class="btn btn-primary btn-lg">返回單元</a>
+                </div>
+                
+                
+            </div>
+        </div>      
+    </div>
+    
+</body>
+
+</html>
