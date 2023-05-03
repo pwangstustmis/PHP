@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>PHP表單處理-一個網頁表單處理</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="scripts/myscript.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="sidenav">
+            <div class="unititem">
+                <div><a href="#slide-1" class="itembutton" onclick="nextSlide(1);">1</a></div>
+                <div>表單檔案設計</div>                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-2" class="itembutton" onclick="nextSlide(2);">2</a></div>
+                <div>表單處理設計($_SERVER變數)</div>                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-3" class="itembutton" onclick="nextSlide(3);">3</a></div>
+                <div>表單處理設計(isset函數)</div>                                                              
+            </div>
+
+        </div>
+        <div class="main">
+            <div class="slides">
+                <!--單元內容-->
+                <div class="slide" id="slide-1">
+                    <div class="unittitle">表單檔案設計</div>
+                    <p>一個網頁檔表單處理是指 <em>表單檔案與表單處理檔案為同一個檔案</em>，因此表單檔案必須為為<em>PHP檔</em>。由於表單檔案與表單處理檔案為同一個檔案，因此 <em>表單 action 設定值為自己</em>，請注意PHP有一系統變數<em> $_SERVER['PHP_SELF'] </em>會傳回現在執行檔案的名稱，但是 $_SERVER['PHP_SELF']設定會受網頁 XSS 會攻擊，使用者可 <em>直接設定檔名</em> 或 使用 action="&lt;?php =htmlentities($_SERVER['PHP_SELF']); ?&gt;"。函數<em>htmlentities</em>會將特殊字元轉為HTML字元，以下程式為<em>p1.php</em></p>
+                                     
+                    <p class="codeblock">
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;!-- 設定utf-8編碼 --&gt;
+        &lt;meta charset="utf-8"&gt;       
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;form method="post" action="p1.php"&gt;
+            &lt;div class="form-group"&gt;
+                &lt;label for="f1">帳號&lt;/label&gt;
+                &lt;input type="text" class="form-control" id="f1" name="account"&gt;
+            &lt;/div&gt;
+            &lt;div class="form-group"&gt;
+                &lt;label for="f2">密碼&lt;/label&gt;
+                &lt;input type="text" class="form-control" id="f2" name="password"&gt;
+            &lt;/div&gt;
+            &lt;button type="submit" class="btn btn-primary" name="btn"&gt;登入&lt;/button&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                    </p>
+                </div>
+                <div class="slide" id="slide-2">
+                    <div class="unittitle">表單處理設計($_SERVER變數)</div>
+                    <p>使用者點選表單傳送後，表單傳送方法<em> get或post </em>會儲存於PHP系統變數<em> $_SERVER["REQUEST_METHOD"] </em>中，因此，我們可以使用 <em> $_SERVER["REQUEST_METHOD"] </em> 值來判斷使用者是否點選送出表單。請注意：<em>系統變數都必須是大寫，系統變數中值也是大寫</em>，如果表單傳送方法為 get，系統變數 $_SERVER["REQUEST_METHOD"] 值為 GET，如果表單傳送方法為 post，系統變數 $_SERVER["REQUEST_METHOD"] 值為 POST，如果使用者沒有傳送表單，則$_SERVER["REQUEST_METHOD"] 預設值為GET。</p>
+                    <p>
+                        下列程式使用(p1.php)使用$_SERVER變數並以POST方式呼叫自己。
+                    </p>                   
+                    <p class="codeblock">
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;!-- 設定utf-8編碼 --&gt;
+        &lt;meta charset="utf-8"&gt;       
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;?php
+            if ($_SERVER["REQUEST_METHOD"]=="POST") {
+                //檢查帳號密碼 存在使用 header 函數套至特定網頁
+                //如果不存在則顯示錯誤訊息
+            }
+        ?&gt;
+        &lt;form method="post" action="p1.php"&gt;
+            &lt;div class="form-group"&gt;
+                &lt;label for="f1">帳號&lt;/label&gt;
+                &lt;input type="text" class="form-control" id="f1" name="account"&gt;
+            &lt;/div&gt;
+            &lt;div class="form-group"&gt;
+                &lt;label for="f2">密碼&lt;/label&gt;
+                &lt;input type="text" class="form-control" id="f2" name="password"&gt;
+            &lt;/div&gt;
+            &lt;button type="submit" class="btn btn-primary" name="btn"&gt;登入&lt;/button&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                    </p>
+                </div>
+                <div class="slide" id="slide-3">
+                    <div class="unittitle">表單處理設計(isset函數)</div>
+                    <p>如果不使用 $_SERVER 變數，使用者也可以利用 <em>isset</em> 函數檢查表單欄位是否存在，因為當使用者真正送出表單時，表單欄位才會有設定值。</p>
+                    <p class="codeblock">
+    &lt;html&gt;
+    &lt;head&gt;
+        &lt;!-- 設定utf-8編碼 --&gt;
+        &lt;meta charset="utf-8"&gt;       
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;?php
+            if (isset($_POST["account"])) {
+                //檢查帳號密碼 存在使用 header 函數套至特定網頁
+                //如果不存在則顯示錯誤訊息
+            }
+        ?&gt;
+        &lt;form method="post" action="p1.php"&gt;
+            &lt;div class="form-group"&gt;
+                &lt;label for="f1">帳號&lt;/label&gt;
+                &lt;input type="text" class="form-control" id="f1" name="account"&gt;
+            &lt;/div&gt;
+            &lt;div class="form-group"&gt;
+                &lt;label for="f2">密碼&lt;/label&gt;
+                &lt;input type="text" class="form-control" id="f2" name="password"&gt;
+            &lt;/div&gt;
+            &lt;button type="submit" class="btn btn-primary" name="btn"&gt;登入&lt;/button&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                    </p>
+                </div>
+                
+
+                <div class="backbtn">
+                    <a href="index.html" type="button" class="btn btn-primary btn-lg">返回單元</a>
+                </div>
+                
+                
+            </div>
+        </div>      
+    </div>
+    
+</body>
+
+</html>

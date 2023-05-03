@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>PHP表單處理-狀態管理</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="scripts/myscript.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="sidenav">
+            <div class="unititem">
+                <div><a href="#slide-1" class="itembutton" onclick="nextSlide(1);">1</a></div>
+                <div>$_COOKIE</div>                                              
+            </div>
+            <div class="unititem">
+                <div><a href="#slide-2" class="itembutton" onclick="nextSlide(2);">2</a></div>
+                <div>$_SESSION</div>                                              
+            </div>
+
+        </div>
+        <div class="main">
+            <div class="slides">
+                <!--單元內容-->
+                <div class="slide" id="slide-1">
+                    <div class="unittitle">$_COOKIE</div>
+                    <p><em>cookie</em> 為伺服器寫於客戶端的檔案，最大為4K，當使用者送出要求時，cookie值會一併傳送，cookie目的是因為HTTP為無狀態，當伺服器想要紀錄一些簡單資訊於客戶端時，會使用cookie來記錄這些訊息。PHP cookie設定命令如下：<em>setcookie(cookie變數名稱,cookie設定值,cookie效期,伺服器端使用cookie路徑)，效期以現在時間(time())為基準，並以秒為單位，預設效期為30天(86400*30)，伺服器端使用cookie路徑預設為整個網站("/")，如果指定特定伺服器的路徑才能取用cookie時，則伺服器端使用cookie路徑會設定該路徑值。請注意：$_COOKIE變數為一陣列</em></p>
+                                     
+                    <p class="codeblock">
+&lt;?php
+    //設定cookie變數account
+    setcookie("account","abc");
+    echo $_COOKIE["account"]; //印出cookie值
+    setcookie("account","abc",time()-10); //刪除cookie,因為效期過期
+?&gt;
+                    </p>
+                    <div class="unittitle">練習</div>
+                    <p class="codeblock">
+1. 請利用cookie儲存使用者拜訪次數，每次拜訪則拜訪次數加1並更新該cookie值。
+2. 包含p1.php與p2.php兩個檔案，網站進入點為p1.php。p1.php包含送出按鈕與一文字方塊用於輸入暱稱，使用cookie並設計如果使用者先前輸過暱稱則直接跳到p2.php，否則要在p1.php等使用者輸入暱稱後跳p2.php。
+                    </p>
+
+                </div>
+                <div class="slide" id="slide-2">
+                    <div class="unittitle">$_SESSION</div>
+                    <p>Session為一暫時性的全域變數，當使用者關閉瀏覽器離開網站時，'這些暫時性變數就會不存在。不同於先前cookie，Session可儲存複雜資料，同時變數存在位置不在客戶端，而是在伺服器端。<em>使用Session變數，請在PHP檔第一行設定session_start()命令</em>，之後就可以利用<em>$_SESSION</em>系統變數來設定或取得變數值，使用者可以使用<em>session_destroy()</em>命令來刪除所有的Session變數，或使用<em>unset($_SESSION['變數名稱'])</em>來刪除特定的Session變數。</p>                 
+                    <p class="codeblock">
+&lt;?php
+    session_start(); //如果沒有設定session_start()則無法使用Session變數
+    //設定Session變數account
+    $_SESSION['account']='abc';
+    $_SESSION['password']='1234';
+    unset($_SESSION['password']); //刪除$_SESSION['password']
+    session_destroy(); //刪除所有Session變數
+?&gt;
+                    </p>
+                    <div class="unittitle">練習</div>
+                    <p class="codeblock">
+1. 包含p1.php與p2.php兩個檔案，網站進入點為p1.php。p1.php包含送出按鈕與一文字方塊用於輸入暱稱，使用Session變數nickname儲存輸入暱稱，當使用者重新進入p1.php而且Session變數nickname存在則直接跳到p2.php，否則要在p1.php等使用者輸入暱稱後跳p2.php。
+2. 請使用Session變數cart儲存使用者點選購物車。p1.php中表單包含5樣商品(名稱、單價、數量、加入購物車按鈕)，使用者可藉由點選增加(+)及減少(-)按鈕來改變數量，點選加入購物車將選擇資料及數量加入購物車。
+                    </p>
+
+                </div>
+                
+
+                <div class="backbtn">
+                    <a href="index.html" type="button" class="btn btn-primary btn-lg">返回單元</a>
+                </div>
+                
+                
+            </div>
+        </div>      
+    </div>
+    
+</body>
+
+</html>
